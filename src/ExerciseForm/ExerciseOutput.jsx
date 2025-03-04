@@ -1,5 +1,6 @@
 import React from "react";
 import "./ExerciseApp.css";
+import { Link } from "react-router-dom";
 
 const ExerciseOutput = ({exercises}) => {
     return(
@@ -18,6 +19,8 @@ const ExerciseOutput = ({exercises}) => {
                     ))}
                 </ul>
             )}
+
+            <Link to="/exercise-input">Add Moree Exerecises</Link>
         </div>
     );
 };

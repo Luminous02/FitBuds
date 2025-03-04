@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import "./ExerciseApp.css";
+import {Link} from "react-router-dom";
 
 const ExerciseInput = ({onAddExercise}) => {
     const [exercise, setExercise] = useState({name: "", duration: "", calories: ""});
@@ -56,6 +57,8 @@ const ExerciseInput = ({onAddExercise}) => {
 
                 <button type="submit">Add Exercise</button>
             </form>
+
+            <Link to="/exercise-output">View Exercises</Link>
         </div>
     );
 };
