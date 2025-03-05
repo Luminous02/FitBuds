@@ -23,9 +23,8 @@ function App() {
       <Router>
         <Routes>
           {/*redirect to exercise input if logged in*/}
-          <Route path="/" element={isAuthenticated ? <Navigate to="/exercise-input"/> : <LoginForm />} />
-          <Route path="exercise-input" element={<ExerciseInput />} />
-          <Route path="exercise-output" element={<ExerciseOutput />} />
+          <Route path="/exercise-input" element={<ExerciseInput />} />
+          <Route path="/exercise-output" element={<ExerciseOutput />} />
         </Routes>
       </Router>
     </>
