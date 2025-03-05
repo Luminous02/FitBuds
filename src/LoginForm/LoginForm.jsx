@@ -1,70 +1,41 @@
-import React, { useState } from "react";
+import React, { useState }, { useState } from "react";
 import "./LoginForm.css";
 import { FaUser, FaLock } from "react-icons/fa";
-//import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const [credentials, setCredentials] = useState({username: "", password:""});
-  const [error, setError] = useState("");
 
-  const handleChange = (e) => {
-    setCredentials({...credentials, [e.target.name]: e.target.value});
-  };
+  const [user, setUser] = useState({ username: '', password: '' })
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setError(""); //reset error message
-
-    try {
-      const response = await fetch("https://INSERTURLHERE/api/login", { //FIX URL
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(credentials),
-      });
-
-      const data = await response.json();
-
-      if(response.ok) {
-        localStorage.setItem("token", data.token);
-        alert("Login Successful!");
-        window.location.href = "/dashboard"; //redirect to new page (INSERT PROPER NAME)
-      }
-      else {
-        setError(data.message || "Invalid login credentials");
-      }
-    } catch (err){
-      setError("Failed to connect to the server");
+    if(user.username === "guest" && user.password === "password"){
+      alert("Valid user");
+      navigate("/Dashboard");
+    } else{
+      alert("Invalid user");
     }
-  };
-
-
+  }
 
   return (
-    <div className="wrapper">
+    <div className="wrapper active">
       <form action="">
         <h1>Login</h1>
 
         {error && <p className="error">{error}</p>}
 
         <div className="input-box">
-          <input 
-            type="text" 
-            name="username"
-            placeholder="Username" 
-            value={credentials.username}
-            onChange={handleChange}
-            required />
+          <input type="text" placeholder="Username" required 
+          value={user.username}
+          onChange={(e) => setUser({ ...user, username: e.target.value })}/>
           <FaUser className="icon" />
         </div>
 
         <div className="input-box">
-          <input 
-            type="password" 
-            name="password"
-            placeholder="Password" 
-            value={credentials.password}
-            onChange={handleChange}
-            required />
+          <input type="password" placeholder="Password" required 
+          value={user.password}
+          onChange={(e) => setUser({ ...user, password: e.target.value })}/>
           <FaLock className="icon" />
         </div>
 
@@ -76,7 +47,7 @@ const LoginForm = () => {
           <a href="#">Forgot password?</a>
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit" onClick={(e) => handleLogin(e)}>Login</button>
 
         <div className="register-link">
           <p>
@@ -84,6 +55,7 @@ const LoginForm = () => {
           </p>
         </div>
       </form>
+
     </div>
   );
 };
