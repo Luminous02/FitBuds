@@ -12,7 +12,7 @@ const LoginForm = () => {
     e.preventDefault();
     if(user.username === "guest" && user.password === "password"){
       alert("Valid user");
-      navigate("/dashboard");
+      navigate("/Dashboard");
     } else{
       alert("Invalid user");
     }

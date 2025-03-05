@@ -1,9 +1,8 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
 import LoginForm from "./LoginForm/LoginForm";
-import Dashboard from "./Dashboard/dash";
+import Dashboard from "./Dashboard/Dashboard";
+import { useEffect } from "react";
 
 function App() {
   return (
