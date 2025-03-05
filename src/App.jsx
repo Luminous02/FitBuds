@@ -1,10 +1,8 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
 import LoginForm from "./LoginForm/LoginForm";
 import ExerciseInput from "./ExerciseForm/ExerciseInput";
 import ExerciseOutput from "./ExerciseForm/ExerciseOutput";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-
 import Dashboard from "./Dashboard/Dashboard";
 import { useEffect } from "react";
 
