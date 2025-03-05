@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import "./ExerciseApp.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
-const ExerciseInput = ({onAddExercise}) => {
+const ExerciseInput = ({ onAddExercise }) => {
+    const navigate = useNavigate();
     const [exercise, setExercise] = useState({name: "", duration: "", calories: ""});
 
     const handleChange = (e) => {
@@ -14,6 +15,7 @@ const ExerciseInput = ({onAddExercise}) => {
         if (exercise.name && exercise.duration && exercise.calories) {
             onAddExercise(exercise);
             setExercise({name: "", duration: "", calories: ""});
+            navigate("/exercise-output");
         }
     };
 
