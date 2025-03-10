@@ -105,17 +105,8 @@ const Dashboard = () => {
                     </li>
                     <li id="theme-switch" onClick={() => setDarkMode(!darkMode)}>
                         <button>
-                            {darkMode ? (
-                                <>
-                                    <i className="bx bx-sun" id="light-icon"></i>
-                                    <span className="nav-item" id="theme-text">Light Mode</span>
-                                </>
-                            ) : (
-                                    <>
-                                        <i className="bx bxs-moon" id="dark-icon"></i>
-                                        <span className="nav-item" id="theme-text">Dark Mode</span>
-                                    </>
-                            )}
+                            <i className={darkMode ? "bx bx-sun" : "bx bxs-moon"}></i>
+                            <span className="nav-itm" id="theme-text">{darkMode ? "Light Mode" : "Dark Mode"}</span>
                         </button>
                         <span className="tooltip" id="theme-tooltip">{darkMode ? "Light Mode" : "Dark Mode"}</span>
                     </li>
