@@ -1,3 +1,4 @@
+
 import React, {useState} from "react";
 import "./ExerciseApp.css";
 import {Link, useNavigate} from "react-router-dom";
@@ -5,6 +6,9 @@ import {Link, useNavigate} from "react-router-dom";
 const ExerciseInput = ({ onAddExercise }) => {
     const navigate = useNavigate();
     const [exercise, setExercise] = useState({name: "", duration: "", calories: ""});
+    
+    console.log("ExerciseInput component rendered");
+
 
     const handleChange = (e) => {
         setExercise({...exercise, [e.target.name]: e.target.value});
@@ -19,8 +23,14 @@ const ExerciseInput = ({ onAddExercise }) => {
         }
     };
 
+    const handleViewExercises = () => {
+        navigate("/exercise-output");
+    };
+
     return (
-        <div className="wrapper">
+        
+        <div className="exercise-input-wrapper">
+            <h1>Test:Exercies input</h1>
             <form onSubmit={handleSubmit}>
                 <h1>Log Exercise</h1>
 
@@ -60,7 +70,10 @@ const ExerciseInput = ({ onAddExercise }) => {
                 <button type="submit">Add Exercise</button>
             </form>
 
-            <Link to="/exercise-output">View Exercises</Link>
+            <button className="view-exercises-btn" onClick={handleViewExercises}>
+                View Exercises
+            </button>
+            {/*<Link to="/exercise-output">View Exercises</Link>*/}
         </div>
     );
 };

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const ExerciseOutput = ({exercises}) => {
     return(
-        <div className="wrapper">
+        <div className="exercise-input-wrapper">
             <h1>Exercise Log</h1>
             {exercises.length === 0 ? (
                 <p>No exercises logged yet.</p>

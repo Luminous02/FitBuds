@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import {Link, useNavigate} from "react-router-dom";
 import "./Dashboard.css";
 
 const Dashboard = () => {
+    const navigate = useNavigate();
+
     const [darkMode, setDarkMode] = useState(
         localStorage.getItem("darkmode") === "active"
     );
@@ -83,7 +86,7 @@ const Dashboard = () => {
                         <span className="tooltip">Exercises</span>
                     </li>
                     <li>
-                        <button>
+                        <button onClick={() => navigate("/progress")}>
                             <i className="bx bx-trending-up"></i>
                             <span className="nav-item">Progress</span>
                         </button>
@@ -121,11 +124,17 @@ const Dashboard = () => {
                     </li>
                 </ul>
             </div>
-            <div className="main-content">
+            
+            {/*<div className="main-content">
                 <div className="container">
                     <h1>Dashboard</h1>
+                    <div className="progress-options">
+                        <h2>Progress Options</h2>
+                        <Link to="/exercise-input">Add Exercise</Link>
+                        <Link to="/exercise-output">View Exercise Log</Link>
+                    </div>
                 </div>
-            </div>
+            </div>*/}
         </div>
     );
 };

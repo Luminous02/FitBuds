@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
-/*import LoginForm from "./LoginForm/LoginForm";*/
+import LoginForm from "./LoginForm/LoginForm";
 import ExerciseInput from "./ExerciseForm/ExerciseInput";
 import ExerciseOutput from "./ExerciseForm/ExerciseOutput";
+import ProgressPage from "./ExerciseForm/ProgressPage";
 import Dashboard from "./Dashboard/Dashboard";
 import { useState } from "react";
 
@@ -11,6 +12,7 @@ function App() {
   const [exercises, setExercises] = useState([]);
 
   const addExercise = (newExercise) => {
+    console.log("Adding exercise:", newExercise);
     setExercises([...exercises, newExercise]);
   };
 
@@ -21,6 +23,7 @@ function App() {
           {/*redirect to exercise input if logged in*/}
           <Route path="/" element={<LoginForm />} />
           <Route path="/dashboard" element={<Dashboard />} /> 
+          <Route path="/progress" element={<ProgressPage />} />
           <Route path="/exercise-input" element={<ExerciseInput onAddExercise={addExercise} />} />
           <Route path="/exercise-output" element={<ExerciseOutput exercises={exercises}/>} />
           
