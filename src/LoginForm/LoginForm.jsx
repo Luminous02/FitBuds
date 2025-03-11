@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import React, { useState } from "react";
 import "./LoginForm.css";
 import { FaUser, FaLock } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
 
   const [user, setUser] = useState({ username: '', password: '' })
   const navigate = useNavigate();
-  const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ const LoginForm = () => {
       alert("Valid user");
       navigate("/Dashboard");
     } else{
-      setError("Invalid user");
+      alert("Invalid user");
     }
   }
 

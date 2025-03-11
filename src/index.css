@@ -31,10 +31,10 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  /*place-items: center;*/
   min-width: 320px;
   min-height: 100vh;
-  background: url("./assets/login.jpg") no-repeat;
+  background: #ebf2fa;
   background-size: cover;
   background-position: center;
 }
