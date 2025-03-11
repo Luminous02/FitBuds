@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import React, { useState } from "react";
 import "./LoginForm.css";
 import { FaUser, FaLock } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
