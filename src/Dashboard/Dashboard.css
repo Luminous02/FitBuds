@@ -316,12 +316,13 @@ header {
 }
 
 .main-content {
-    position: relative;
+    position: fixed;
     background-color: white;
-    min-height: 100vh;
+    transition: all 0.5s ease;
+    height: calc(100vh - 70px);
+    width: calc(100% - 80px);
     top: 70px;
     left: 80px;
-    transition: all 0.5s ease;
-    width: calc(100% - 80px);
     padding: 1rem;
+    overflow-y: auto;
 }
