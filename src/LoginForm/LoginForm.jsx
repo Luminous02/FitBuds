@@ -1,42 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import "./LoginForm.css";
 import { FaUser, FaLock } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-
-  const [user, setUser] = useState({ username: '', password: '' })
-  const [error, setError] = useState("");  
-  const navigate = useNavigate();
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    if(user.username === "guest" && user.password === "password"){
-      alert("Valid user");
-      navigate("/Dashboard");
-    } else{
-      alert("Invalid user");
-    }
-  }
-
   return (
-    <div className="wrapper active">
+    <div className="wrapper">
       <form action="">
         <h1>Login</h1>
 
-        {error && <p className="error">{error}</p>}
-
         <div className="input-box">
-          <input type="text" placeholder="Username" required 
-          value={user.username}
-          onChange={(e) => setUser({ ...user, username: e.target.value })}/>
+          <input type="text" placeholder="Username" required />
           <FaUser className="icon" />
         </div>
-
         <div className="input-box">
-          <input type="password" placeholder="Password" required 
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}/>
+          <input type="password" placeholder="Password" required />
           <FaLock className="icon" />
         </div>
 
@@ -48,7 +25,7 @@ const LoginForm = () => {
           <a href="#">Forgot password?</a>
         </div>
 
-        <button type="submit" onClick={(e) => handleLogin(e)}>Login</button>
+        <button type="submit">Login</button>
 
         <div className="register-link">
           <p>
@@ -56,7 +33,6 @@ const LoginForm = () => {
           </p>
         </div>
       </form>
-
     </div>
   );
 };
