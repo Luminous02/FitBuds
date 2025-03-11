@@ -15,6 +15,10 @@ const RegisterForm = () => {
 
   const navigate = useNavigate();
 
+  const navDashboard = () => {
+    navigate("/Dashboard");
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -31,7 +35,7 @@ const RegisterForm = () => {
       );
       console.log(response);
 
-      navigate("/login");
+      navDashboard();
     } catch (error) {
       console.error(
         "Error during submission:",
