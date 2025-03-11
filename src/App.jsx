@@ -11,11 +11,12 @@ import RegisterForm from "./RegisterForm/RegisterForm";
 import Dashboard from "./Dashboard/Dashboard";
 import Home from "./Home/Home";
 import Calendar from "./Calendar/Calendar";
-import Exercises from "./Exercises/Exercises";
+import ExerciseInput from "./ExerciseForm/ExerciseInput";
+import ExerciseOutput from "./ExerciseForm/ExerciseOutput";
+import ProgressPage from "./ExerciseForm/ProgressPage";
 import Settings from "./Settings/Settings";
 import NotFound from "./NotFound/NotFound";
 import { useEffect } from "react";
-import ProgressPage from "./ExerciseForm/ProgressPage";
 import { useState } from "react";
 
 function App() {
@@ -35,9 +36,9 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="home" element={<Home />} />
           <Route path="calendar" element={<Calendar />} />
-          <Route path="/progress" element={<ProgressPage />} />
-          <Route path="/exercise-input" element={<ExerciseInput onAddExercise={addExercise} />} />
-          <Route path="/exercise-output" element={<ExerciseOutput exercises={exercises}/>} />
+          <Route path="progress" element={<ProgressPage />} />
+          <Route path="exercise-input" element={<ExerciseInput onAddExercise={addExercise} />} />
+          <Route path="exercise-output" element={<ExerciseOutput exercises={exercises}/>} />
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="*" element={<NotFound />} />
