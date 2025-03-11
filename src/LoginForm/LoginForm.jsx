@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
 
   const [user, setUser] = useState({ username: '', password: '' })
+  const [error, setError] = useState("");  
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
