@@ -6,6 +6,11 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   padding: 30px 40px;
+  display: none;
+}
+
+.wrapper.active{
+  display: block;
 }
 
 .wrapper h1 {
