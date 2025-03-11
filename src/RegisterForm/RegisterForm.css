@@ -1,22 +1,16 @@
 .wrapper {
   width: 420px;
-  background: #679436;
+  background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(30px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   padding: 30px 40px;
-  display: none;
-}
-
-.wrapper.active {
-  display: block;
 }
 
 .wrapper h1 {
   font-size: 36px;
   text-align: center;
-  color: #fff;
 }
 
 .wrapper .input-box {

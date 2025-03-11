@@ -1,6 +1,13 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
+import Splash from "./SplashPage/SplashPage";
 import LoginForm from "./LoginForm/LoginForm";
+import RegisterForm from "./RegisterForm/RegisterForm";
 import Dashboard from "./Dashboard/Dashboard";
 import Home from "./Home/Home";
 import Calendar from "./Calendar/Calendar";
@@ -14,7 +21,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginForm />} />
+        <Route path="/" element={<Splash />} />
+        <Route path="/login" element={<LoginForm />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="home" element={<Home />} />
           <Route path="calendar" element={<Calendar />} />
