@@ -16,7 +16,7 @@ header {
   height: 70px;
   width: 100%;
   padding: 0 30px;
-  background-color: black;
+  background-color: #3d3d3d;
   position: fixed;
   top: 0;
   left: 0;
@@ -53,7 +53,7 @@ header {
   align-items: center;
   justify-content: center;
   border-radius: 0px 50px 50px 0px;
-  background-color: darkred;
+  background-color: #679436;
   cursor: pointer;
   color: white;
 }
@@ -80,7 +80,7 @@ header {
   left: 0;
   height: calc(100vh - 70px);
   width: 80px;
-  background-color: darkred;
+  background-color: #679436;
   padding: 1rem;
   transition: width 0.3s ease-in-out;
   display: flex;
@@ -206,7 +206,7 @@ header {
 
 .sidebar ul li button:hover {
   background-color: white;
-  color: red;
+  color: #9fc972;
 }
 
 .sidebar ul li button i {
