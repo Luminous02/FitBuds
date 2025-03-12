@@ -9,10 +9,10 @@ const ProgressPage = () => {
         <div className="progress-container">
             <h1>Exercise Progress</h1>
             <div className='progress-buttons'>
-                <button className="add-exercise-btn" onClick={() => navigate("/exercise-input")}>
+                <button className="add-exercise-btn" onClick={() => navigate("/dashboard/exercise-input")}>
                     Add New Exercise
                 </button>
-                <button className="view-exercise-btn" onClick={() => navigate("/exercise-output")}>
+                <button className="view-exercise-btn" onClick={() => navigate("/dashboard/exercise-output")}>
                     View Exercise Logs
                 </button>
             </div>

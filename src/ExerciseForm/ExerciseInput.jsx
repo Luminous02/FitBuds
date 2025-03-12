@@ -30,7 +30,6 @@ const ExerciseInput = ({ onAddExercise }) => {
     return (
         
         <div className="exercise-input-wrapper">
-            <h1>Test:Exercies input</h1>
             <form onSubmit={handleSubmit}>
                 <h1>Log Exercise</h1>
 
