@@ -24,7 +24,7 @@ const ExerciseInput = ({ onAddExercise }) => {
     };
 
     const handleViewExercises = () => {
-        navigate("/exercise-output");
+        navigate("/dashboard/exercise-output");
     };
 
     return (
