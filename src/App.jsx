@@ -33,6 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="home" element={<Home />} />
           <Route path="calendar" element={<Calendar />} />
