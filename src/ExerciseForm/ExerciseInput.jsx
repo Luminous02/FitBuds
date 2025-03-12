@@ -19,7 +19,7 @@ const ExerciseInput = ({ onAddExercise }) => {
         if (exercise.name && exercise.duration && exercise.calories) {
             onAddExercise(exercise);
             setExercise({name: "", duration: "", calories: ""});
-            navigate("/exercise-output");
+            navigate("/dashboard/exercise-output");
         }
     };
 

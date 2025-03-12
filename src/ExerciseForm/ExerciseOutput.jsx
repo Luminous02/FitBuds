@@ -20,7 +20,7 @@ const ExerciseOutput = ({exercises}) => {
                 </ul>
             )}
 
-            <Link to="/exercise-input">Add Moree Exerecises</Link>
+            <Link to="/dashboard/exercise-input">Add More Exerecises</Link>
         </div>
     );
 };
