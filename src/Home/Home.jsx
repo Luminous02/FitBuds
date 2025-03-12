@@ -3,7 +3,7 @@ import "./Home.css";
 
 const Home = () => {
   return (
-    <div className="container">
+    <div className="homeContainer">
       <div className="feedScroll">
         <h1>Feed</h1>
         <div className="feedCard">
