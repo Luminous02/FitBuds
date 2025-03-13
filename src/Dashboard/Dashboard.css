@@ -180,7 +180,7 @@ header {
 
 .sidebar ul li a:hover {
   background-color: white;
-  color: red;
+  color: #679436;
 }
 
 .sidebar ul li a i {
@@ -206,7 +206,7 @@ header {
 
 .sidebar ul li button:hover {
   background-color: white;
-  color: #9fc972;
+  color: #679436;
 }
 
 .sidebar ul li button i {
@@ -283,7 +283,7 @@ header {
 
 .sidebar ul li#theme-switch button:hover {
   background-color: white;
-  color: red;
+  color: #679436;
 }
 
 .sidebar.active ul li#theme-switch .tooltip {
