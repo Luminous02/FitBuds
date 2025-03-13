@@ -1,46 +1,99 @@
 .homeContainer {
-  display: flex;
+  display: grid;
   height: 100vh;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 5px auto;
 }
 
 .feedScroll {
-  flex: 1;
+  grid-column: 1;
+  grid-row: 3;
   overflow-y: auto;
-  padding: 20px;
 }
 
 .leaderScroll {
-  flex: 1;
+  grid-column: 2;
+  grid-row: 3;
   overflow-y: auto;
   padding: 20px;
-  width: 50%;
+}
+
+.gradientBlock {
+  z-index: 100;
+  height: 25px;
+  overflow-y: auto;
+  grid-column: span 2;
+  background: linear-gradient(white, rgba(255, 255, 255, 0));
 }
 
 h1 {
-  margin: 2%;
-}
-
-p {
-  margin-bottom: 5vh;
+  grid-row: 1;
+  margin: 0 0 2% 0;
 }
 
 .feedCard {
-  padding: 3vh 0 3vh 5vh;
+  padding: 3vh 5vh 3vh 5vh;
   margin-top: 3%;
   margin-bottom: 3%;
   background: #9fc972;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #679436;
   backdrop-filter: blur(30px);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   color: black;
   text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-.cardContent {
-  display: inline-block;
+.feedCard h3 {
+  font-size: x-large;
+}
+
+.feedCard h5 {
+  color: #3d3d3d;
+}
+
+.cardUserData {
+  grid-column: span 3;
+}
+
+.exerciseData {
+  grid-column: span 3;
+  text-align: center;
+  margin: 2%;
 }
 
 #moreButton {
-  margin-left: 24vw;
+  background: transparent;
+  font-size: x-large;
+  padding: 0;
+  margin-left: 75%;
+  grid-column: 3;
+  width: 25%;
+  border: transparent;
+  color: #3d3d3d;
+}
+
+#likeButton {
+  background: transparent;
+  font-size: x-large;
+  padding: 0;
+  grid-column: 1;
+  grid-row: 3;
+  width: 25%;
+  border: transparent;
+  color: #3d3d3d;
+}
+
+#shareButton {
+  background: transparent;
+  font-size: x-large;
+  padding: 0;
+  margin-left: 25%;
+  grid-column: 1;
+  grid-row: 3;
+  width: 25%;
+  border: transparent;
+  color: #3d3d3d;
 }
