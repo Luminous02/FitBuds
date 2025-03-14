@@ -10,9 +10,9 @@ const ExerciseInput = ({ onAddExercise }) => {
     console.log("ExerciseInput component rendered");
 
 
-    const handleChange = (e) => {
-        setExercise({...exercise, [e.target.name]: e.target.value});
-    };
+  const handleChange = (e) => {
+    setExercise({ ...exercise, [e.target.name]: e.target.value });
+  };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -64,38 +64,38 @@ const ExerciseInput = ({ onAddExercise }) => {
             <form onSubmit={handleSubmit}>
                 <h1>Log Exercise</h1>
 
-                <div className="input-box">
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Exercise Name"
-                        value={exercise.name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+        <div className="input-box">
+          <input
+            type="text"
+            name="name"
+            placeholder="Exercise Name"
+            value={exercise.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-                <div className="input-box">
-                    <input
-                        type="number"
-                        name="duration"
-                        placeholder="Duration (minutes)"
-                        value={exercise.duration}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+        <div className="input-box">
+          <input
+            type="number"
+            name="duration"
+            placeholder="Duration (minutes)"
+            value={exercise.duration}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-                <div className="input-box">
-                    <input
-                        type="number"
-                        name="calories"
-                        placeholder="Calories Burned"
-                        value={exercise.calories}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+        <div className="input-box">
+          <input
+            type="number"
+            name="calories"
+            placeholder="Calories Burned"
+            value={exercise.calories}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
                 <button type="submit" style={submitButtonStyle}>Add Exercise</button>
             </form>

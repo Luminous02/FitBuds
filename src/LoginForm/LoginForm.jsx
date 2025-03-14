@@ -4,35 +4,42 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-
-  const [user, setUser] = useState({ username: '', password: '' })
+  const [user, setUser] = useState({ username: "", password: "" });
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if(user.username === "guest" && user.password === "password"){
+    if (user.username === "guest" && user.password === "password") {
       alert("Valid user");
       navigate("/Dashboard");
-    } else{
+    } else {
       alert("Invalid user");
     }
-  }
+  };
 
   return (
-    <div className="wrapper active">
+    <div className="loginWrapper">
       <form action="">
         <h1>Login</h1>
 
         <div className="input-box">
-          <input type="text" placeholder="Username" required 
-          value={user.username}
-          onChange={(e) => setUser({ ...user, username: e.target.value })}/>
+          <input
+            type="text"
+            placeholder="Username"
+            required
+            value={user.username}
+            onChange={(e) => setUser({ ...user, username: e.target.value })}
+          />
           <FaUser className="icon" />
         </div>
         <div className="input-box">
-          <input type="password" placeholder="Password" required 
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}/>
+          <input
+            type="password"
+            placeholder="Password"
+            required
+            value={user.password}
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+          />
           <FaLock className="icon" />
         </div>
 
@@ -44,7 +51,9 @@ const LoginForm = () => {
           <a href="#">Forgot password?</a>
         </div>
 
-        <button type="submit" onClick={(e) => handleLogin(e)}>Login</button>
+        <button type="submit" onClick={(e) => handleLogin(e)}>
+          Login
+        </button>
 
         <div className="register-link">
           <p>
@@ -52,7 +61,6 @@ const LoginForm = () => {
           </p>
         </div>
       </form>
-
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import "./ExerciseApp.css";
 import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ExerciseOutput = ({exercises}) => {
     return(
