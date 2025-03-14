@@ -14,18 +14,19 @@
 
 /*button styling*/
 .add-exercise-btn, .view-exercise-btn{
-    background-color: #28a745;
-    color: white;
+    background-color: #c1ffcc;
+    color: rgb(0, 0, 0);
     border: none;
     padding: 15px 30px;
     font-size: 1.2rem;
     border-radius: 8px;
     transition: background-color 0.3s ease;
+    outline: #026017 solid 5px;
 }
 
 /*Different color for view logs button*/
 .view-exercise-btn {
-    background-color: #007bff;
+    background-color: #c1ffcc;
 }
 
 /*hover effects*/
@@ -34,5 +35,5 @@
 }
 
 .view-exercise-btn:hover {
-    background-color: #0056b3;
+    background-color: #218838;
 }

@@ -27,6 +27,37 @@ const ExerciseInput = ({ onAddExercise }) => {
         navigate("/dashboard/exercise-output");
     };
 
+    const submitButtonStyle = {
+        background: "#236577",
+        color: "white",
+        width: "100%",
+        height: "45px",
+        border: "none",
+        outline: "none",
+        borderRadius: "10px",
+        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+        cursor: "pointer",
+        fontSize: "16px",
+        fontWeight: "700",
+        marginTop: "10px"
+    };
+    
+    const viewButtonStyle = {
+        background: "#236577",
+        color: "white",
+        width: "100%",
+        height: "45px",
+        border: "none",
+        outline: "none",
+        borderRadius: "10px",
+        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+        cursor: "pointer",
+        fontSize: "16px",
+        fontWeight: "700",
+        marginTop: "10px"
+    };
+    
+
     return (
         
         <div className="exercise-input-wrapper">
@@ -66,10 +97,10 @@ const ExerciseInput = ({ onAddExercise }) => {
                     />
                 </div>
 
-                <button type="submit">Add Exercise</button>
+                <button type="submit" style={submitButtonStyle}>Add Exercise</button>
             </form>
 
-            <button className="view-exercises-btn" onClick={handleViewExercises}>
+            <button onClick={handleViewExercises} style={viewButtonStyle}>
                 View Exercises
             </button>
             {/*<Link to="/exercise-output">View Exercises</Link>*/}
