@@ -1,38 +1,3 @@
-.homeContainer {
-  display: grid;
-  height: 100vh;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto 5px auto;
-}
-
-.feedScroll {
-  grid-column: 1;
-  grid-row: 3;
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-
-.leaderScroll {
-  grid-column: 2;
-  grid-row: 3;
-  overflow-y: auto;
-  padding: 20px;
-  scrollbar-width: none;
-}
-
-.gradientBlock {
-  z-index: 100;
-  height: 25px;
-  overflow-y: auto;
-  grid-column: span 2;
-  background: linear-gradient(white, rgba(255, 255, 255, 0));
-}
-
-h1 {
-  grid-row: 1;
-  margin: 0 0 2% 0;
-}
-
 .feedCard {
   padding: 3vh 5vh 3vh 5vh;
   margin-top: 3%;
