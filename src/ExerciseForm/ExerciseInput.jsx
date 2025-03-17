@@ -28,7 +28,7 @@ const ExerciseInput = ({ onAddExercise }) => {
     };
 
     const submitButtonStyle = {
-        background: "#236577",
+        background: "#187b60",
         color: "white",
         width: "100%",
         height: "45px",
@@ -42,20 +42,7 @@ const ExerciseInput = ({ onAddExercise }) => {
         marginTop: "10px"
     };
     
-    const viewButtonStyle = {
-        background: "#236577",
-        color: "white",
-        width: "100%",
-        height: "45px",
-        border: "none",
-        outline: "none",
-        borderRadius: "10px",
-        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-        cursor: "pointer",
-        fontSize: "16px",
-        fontWeight: "700",
-        marginTop: "10px"
-    };
+    
     
 
     return (
@@ -100,7 +87,7 @@ const ExerciseInput = ({ onAddExercise }) => {
                 <button type="submit" style={submitButtonStyle}>Add Exercise</button>
             </form>
 
-            <button onClick={handleViewExercises} style={viewButtonStyle}>
+            <button onClick={handleViewExercises} style={submitButtonStyle}>
                 View Exercises
             </button>
             {/*<Link to="/exercise-output">View Exercises</Link>*/}

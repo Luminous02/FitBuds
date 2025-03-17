@@ -14,12 +14,7 @@
     "nodemon": "^3.1.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-<<<<<<< HEAD
     "react-icons": "^5.5.0",
-=======
-    "react-icons": "^5.4.0",
-    "react-router": "^7.3.0",
->>>>>>> 064fb1aac9b133d59bf2bc31438026a67e5b3905
     "react-router-dom": "^7.2.0"
   },
   "devDependencies": {
