@@ -11,6 +11,7 @@ import RegisterForm from "./RegisterForm/RegisterForm";
 import Dashboard from "./Dashboard/Dashboard";
 import Home from "./Home/Home";
 import Calendar from "./Calendar/Calendar";
+import Exercises from "./Exercises/Exercises";
 import ExerciseInput from "./ExerciseForm/ExerciseInput";
 import ExerciseOutput from "./ExerciseForm/ExerciseOutput";
 import ProgressPage from "./ExerciseForm/ProgressPage";
@@ -38,6 +39,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="home" element={<Home />} />
           <Route path="calendar" element={<Calendar />} />
+          <Route path="exercises" element={<Exercises />} />
           <Route
             path="exercise-input"
             element={<ExerciseInput onAddExercise={addExercise} />}
