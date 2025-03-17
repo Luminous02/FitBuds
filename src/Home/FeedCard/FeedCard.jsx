@@ -1,4 +1,5 @@
 import { FiThumbsUp, FiMoreHorizontal, FiShare } from "react-icons/fi";
+import "./FeedCard.css";
 
 const FeedCard = () => {
   return (
