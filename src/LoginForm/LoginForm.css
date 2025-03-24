@@ -66,6 +66,7 @@
 .remember-forgot a {
   color: #fff;
   text-decoration: none;
+  margin-left: 5vw;
 }
 
 .remember-forgot a:hover {
@@ -89,10 +90,10 @@
 .loginWrapper .register-link {
   font-size: 14.5px;
   text-align: center;
-  margin: 20px 0 15px;
+  margin: 20px 0 0%;
 }
 
-.register-link p a {
+#registerA {
   margin: 0;
   color: #fff;
   text-decoration: none;
@@ -101,4 +102,10 @@
 
 .register-link p a:hover {
   text-decoration: underline;
+}
+
+.loginWrapper p {
+  max-width: 100%;
+  width: 100%;
+  margin-left: 0%;
 }

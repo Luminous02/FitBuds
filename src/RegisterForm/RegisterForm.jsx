@@ -45,7 +45,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="wrapper active">
+    <div className="registerWrapper active">
       <form onSubmit={handleSubmit}>
         <h1>Register</h1>
 
@@ -108,16 +108,12 @@ const RegisterForm = () => {
             <input type="checkbox" />
             Remember me
           </label>
-          <a href="#">Forgot password?</a>
         </div>
 
         <button type="submit">Register</button>
-
-        <div className="register-link">
-          <p>
-            Don't have an account?<a href="#"> Register</a>
-          </p>
-        </div>
+        <a href="#" id="forgotPass">
+          Forgot password?
+        </a>
       </form>
     </div>
   );

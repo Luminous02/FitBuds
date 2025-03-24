@@ -4,14 +4,14 @@
   min-height: 100%;
 }
 
-h1 {
+.splashwrapper h1 {
   text-align: center;
   color: #1a1a1a;
   margin: 2%;
   margin-top: 8%;
 }
 
-h2 {
+.splashwrapper h2 {
   text-align: left;
   color: #679436;
   font-size: xx-large;
@@ -19,11 +19,11 @@ h2 {
   padding-top: 2%;
 }
 
-p {
-  margin-left: 25%;
-  margin-right: 25%;
+.splashwrapper p {
+  margin-left: 20%;
+  margin-right: 20%;
   color: #3b3b3b;
-  max-width: 50%;
+  max-width: 100%;
   font-size: larger;
   text-align: center;
 }

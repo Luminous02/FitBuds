@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
 import { FaUser, FaLock } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -56,10 +56,11 @@ const LoginForm = () => {
         </button>
 
         <div className="register-link">
-          <p>
-            Don't have an account?<a href="#"> Register</a>
-          </p>
+          <p>Don't have an account?</p>
         </div>
+        <Link to="/register" id="registerA">
+          Register
+        </Link>
       </form>
     </div>
   );
