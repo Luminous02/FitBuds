@@ -3,6 +3,7 @@ import "./Home.css";
 import FeedCard from "./FeedCard/FeedCard.jsx";
 import LeaderboardCard from "./LeaderboardCard/LeaderboardCard.jsx";
 
+
 const Home = () => {
   return (
     <div className="homeContainer">
@@ -22,6 +23,8 @@ const Home = () => {
           </li>
         </ol>
       </div>
+      <h1>Leaderboard</h1>
+      <div className="leaderScroll"></div>
     </div>
   );
 };
