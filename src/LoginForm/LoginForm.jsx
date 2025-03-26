@@ -1,44 +1,77 @@
 import React, { useState } from "react";
 import "./LoginForm.css";
 import { FaUser, FaLock } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 const LoginForm = () => {
-  const [user, setUser] = useState({ username: "", password: "" });
+  const [formValues, setFormValues] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const navDashboard = () => {
+    navigate("/Dashboard");
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (user.username === "guest" && user.password === "password") {
-      alert("Valid user");
-      navigate("/Dashboard");
-    } else {
-      alert("Invalid user");
+    setError("");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login-user",
+        formValues
+      );
+
+      if (response.data.success) {
+        navDashboard();
+      } else {
+        setError(response.data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error("Login error:", error.response || error.message);
+      setError(
+        error.response?.data?.message || "Login failed. Please try again."
+      );
     }
   };
 
   return (
-    <div className="loginWrapper">
-      <form action="">
+    <div className="loginWrapper active">
+      <form onSubmit={handleSubmit}>
         <h1>Login</h1>
+
+        {error && <div className="error-message">{error}</div>}
 
         <div className="input-box">
           <input
             type="text"
             placeholder="Username"
+            name="username"
+            value={formValues.username}
+            onChange={handleInputChange}
             required
-            value={user.username}
-            onChange={(e) => setUser({ ...user, username: e.target.value })}
           />
           <FaUser className="icon" />
         </div>
+
         <div className="input-box">
           <input
             type="password"
             placeholder="Password"
+            name="password"
+            value={formValues.password}
+            onChange={handleInputChange}
             required
-            value={user.password}
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
           />
           <FaLock className="icon" />
         </div>
@@ -48,18 +81,19 @@ const LoginForm = () => {
             <input type="checkbox" />
             Remember me
           </label>
-          <a href="#">Forgot password?</a>
+          <Link to="/forgot-password" id="forgotPass">
+            Forgot password?
+          </Link>
         </div>
 
-        <button type="submit" onClick={(e) => handleLogin(e)}>
-          Login
-        </button>
+        <button type="submit">Login</button>
 
         <div className="register-link">
-          <p>
-            Don't have an account?<a href="#"> Register</a>
-          </p>
+          <p>Don't have an account?</p>
         </div>
+        <Link to="/register" id="registerA">
+          Register
+        </Link>
       </form>
     </div>
   );

@@ -396,5 +396,5 @@ header {
   left: 80px;
   transition: all 0.5s ease;
   width: calc(100% - 80px);
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
 }

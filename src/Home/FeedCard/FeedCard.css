@@ -1,7 +1,6 @@
 .feedCard {
   padding: 3vh 5vh 3vh 5vh;
-  margin-top: 3%;
-  margin-bottom: 3%;
+  margin: 0 2% 3% 2%;
   background: #8fab71;
   border: 1px solid #679436;
   backdrop-filter: blur(30px);
