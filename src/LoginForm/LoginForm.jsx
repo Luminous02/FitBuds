@@ -86,7 +86,9 @@ const LoginForm = () => {
           </Link>
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit" id="loginSubmit">
+          Login
+        </button>
 
         <div className="register-link">
           <p>Don't have an account?</p>

@@ -110,7 +110,9 @@ const RegisterForm = () => {
           </label>
         </div>
 
-        <button type="submit">Register</button>
+        <button type="submit" id="loginSubmit">
+          Register
+        </button>
         <a href="#" id="forgotPass">
           Forgot password?
         </a>
