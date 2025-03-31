@@ -1,5 +1,6 @@
 import userModel from "../models/userModel.js";
 import { registerUser, loginUser } from "../services/authServices.js";
+import { pool } from "../config/db.js";
 
 export const register = async (req, res) => {
   const { email, username, password, fname, bday } = req.body;
@@ -58,5 +59,22 @@ export const login = async (req, res) => {
       success: false,
       message: "Login failed, please try again later",
     });
+  }
+};
+
+export const getUserInfo = async (req, res) => {
+  const userId = req.userId;
+
+  try {
+    const [userRows] = await pool.query("SELECT email, fname FROM userData WHERE id = ?", [userId]);
+
+    if(userRows.length === 0) {
+      return res.status(404).json({ success: false, message: "User not found"});
+    }
+
+    return res.status(200).json({ success: true, user: userRows[0] });
+  } catch (error) {
+    console.error("Error fetching user info", error);
+    return res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
