@@ -1,7 +1,121 @@
 .leaderboardCard {
-  display: grid;
-  color: black;
+  padding: 3vh 5vh 3vh 5vh;
+  margin: 0 2% 3% 2%;
   background: #8fab71;
-  grid-template-rows: 1fr 1fr;
+  border: 1px solid #679436;
+  backdrop-filter: blur(30px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  color: black;
+  text-align: left;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.lboard_section {
+  width: 300px;
+  background: #8fab71;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.lboard_tabs {
+  margin-bottom: 20px;
+}
+
+.lboard_tabs ul {
+  display: flex;
+}
+
+.lboard_tabs ul li {
+  margin-right: 15px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  background: #d4e9c7;
+  color: #333;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.lboard_tabs ul li:hover,
+.lboard_tabs ul li.active {
+  background: #a9c68f;
+  color: white;
+}
+
+.lboard_wrap {
+  position: relative;
+  width: 100%; /* Adjust width to fill card */
+  height: 300px; /* Adjust height to fill card */
+  border-radius: 5px;
+  overflow-y: auto;
+}
+
+.lboard_wrap .lboard_item {
+  padding: 15px;
+}
+
+.lboard_wrap .lboard_item .lboard_mem {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid darkgreen;
+}
+
+.lboard_wrap .lboard_item .lboard_mem:first-child {
+  padding-top: 0;
+}
+
+.lboard_wrap .lboard_item .lboard_mem:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.lboard_wrap .lboard_mem .img {
+  width: 50px;
+}
+
+.lboard_wrap .lboard_mem .img img {
+  display: block;
+  width: 100%;
+}
+
+.lboard_wrap .lboard_item .name_bar {
+  margin: 0 20px;
+  width: calc(100% - 150px);
+}
+
+.lboard_wrap .lboard_item .name_bar p {
+  color: black;
+}
+
+.lboard_wrap .lboard_item .name_bar p span {
+  margin-right: 5px;
+}
+
+.lboard_wrap .lboard_item .points {
+  width: 100px;
+  color: #3a3d51;
+}
+
+.lboard_wrap .lboard_item .bar_wrap {
+  height: 5px;
+  width: 100%;
+  background: darkgreen;
+  border-radius: 5px;
+  margin-top: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.lboard_wrap .lboard_item .bar_wrap .inner_bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  background: #fff;
+  border-radius: 5px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 }

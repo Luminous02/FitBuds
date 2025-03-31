@@ -57,7 +57,7 @@ const LeaderboardCard = () => {
           </div>
         </div>
         <div className="lboard_wrap">
-          <div className={"lboard_item ${activeTab}"}>
+          <div className={`lboard_item ${activeTab}`}>
             {leaderboardData[activeTab].map((item) => (
               <div className="lboard_mem" key={item.id}>
                 <div className="img">
@@ -68,7 +68,7 @@ const LeaderboardCard = () => {
                     <span>{item.id}.</span> {item.name}
                   </p>
                   <div className="bar_wrap">
-                    <div className="inner_wrap" style={{width: "${item.percentage}%"}}></div>
+                    <div className="inner_wrap" style={{ width: `${item.percentage}%` }}></div>
                   </div>
                 </div>
                 <div className="points">{item.points} points</div>
