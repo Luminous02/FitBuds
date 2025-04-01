@@ -16,13 +16,14 @@ const Home = () => {
       </div>
       <h1 id="leaderTitle">Leaderboard</h1>
       <div className="leaderScroll">
-        <ol>
-          <li>
-            <LeaderboardCard />
-          </li>
-        </ol>
+        <div className="leaderboardGrid">
+          <LeaderboardCard />
+          <LeaderboardCard />
+          <LeaderboardCard />
+          <LeaderboardCard />
+          <LeaderboardCard />
+        </div>
       </div>
-      <div className="leaderScroll"></div>
     </div>
   );
 };

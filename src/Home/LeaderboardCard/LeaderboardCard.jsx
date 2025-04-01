@@ -10,7 +10,7 @@ const LeaderboardCard = () => {
       { id: 2, name: "Jessy Burns", points: 0, percentage: 0, image: "/profile/boy2.png" },
       { id: 3, name: "Kevin Gibson", points: 0, percentage: 0, image: "/profile/boy4.png" },
       { id: 4, name: "Charles Jones", points: 0, percentage: 0, image: "/profile/boy1.png" },
-      { id: 5, name: "Sally Jorden", points: 0, percentage: 25, image: "/profile/girl2.png" },
+      { id: 5, name: "Sally Jorden", points: 0, percentage: 0, image: "/profile/girl2.png" },
       { id: 6, name: "Mary Smith", points: 0, percentage: 0, image: "/profile/girl3.png" },
       { id: 7, name: "Grey Walker", points: 0, percentage: 0, image: "/profile/boy3.png" },
     ],
@@ -54,6 +54,7 @@ const LeaderboardCard = () => {
                 className={activeTab === "month" ? "active" : ""} 
                 onClick={() => handleTabClick("month")}>Month</li>
             </ul>
+            <div className="sports">Walking</div>
           </div>
         </div>
         <div className="lboard_wrap">
