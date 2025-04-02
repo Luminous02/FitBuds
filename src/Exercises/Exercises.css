@@ -26,16 +26,17 @@
 
 .videoContainer .main-video .title {
     color: #333;
+    text-align: left;
     font-size: 23px;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 
 .videoContainer .video-list {
-    background: #fff;
+    background: #9fc972;
     border-radius: 5px;
     height: 520px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .videoContainer .video-list::-webkit-scrollbar {
@@ -43,7 +44,7 @@
 }
 
 .videoContainer .video-list::-webkit-scrollbar-track {
-    background: #ccc;
+    background: #ededed;
     border-radius: 50px;
 }
 
@@ -61,7 +62,7 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    background: #9fc972;
+    background: #fff;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;

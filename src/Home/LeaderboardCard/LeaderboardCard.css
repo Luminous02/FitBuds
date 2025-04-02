@@ -1,7 +1,130 @@
 .leaderboardCard {
-  display: grid;
+  padding: 3vh 3vh;
+  margin: 0 auto;
+}
+
+.lboard_section {
+  width: 100%;
+  height: 400px;
+  margin:  0;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 25px 40px;
+  position: relative;
+}
+
+.lboard_tabs .tabs {
+  display: flex; /* Add flexbox to container */
+  justify-content: space-between; /* Space items out */
+  align-items: center; /* Align items vertically */
+}
+
+.lboard_section ul {
+  display: flex;
+  list-style: none; /* Explicitly remove list style */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+}
+
+.lboard_section ul li {
+  margin-right: 50px;
+  font-size: 18px;
+  font-weight: 600;
   color: black;
+  cursor: pointer;
+}
+
+.lboard_section ul li:hover, .lboard_section ul li.active {
+  color: #8fab71;
+}
+
+.lboard_section .sports {
+  text-align: right;
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+  cursor: pointer;
+  margin-left: auto; /* Push sports to right */
+}
+
+.lboard_wrap {
+  position: absolute;
+  top: 70px;
+  left: 40px;
   background: #8fab71;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: calc(100% - 80px);
+  height: 300px;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+.lboard_wrap .lboard_item {
+  padding: 15px;
+}
+
+.lboard_wrap .lboard_item .lboard_mem {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid darkgreen;
+}
+
+.lboard_wrap .lboard_item .lboard_mem:first-child {
+  padding-top: 0;
+}
+
+.lboard_wrap .lboard_item .lboard_mem:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.lboard_wrap .lboard_mem .img {
+  width: 50px;
+}
+
+.lboard_wrap .lboard_mem .img img {
+  display: block;
+  width: 100%;
+}
+
+.lboard_wrap .lboard_item .name_bar {
+  margin: 0 20px;
+  width: calc(100% - 150px);
+}
+
+.lboard_wrap .lboard_item .name_bar p {
+  text-align: left;
+  color: black;
+}
+
+.lboard_wrap .lboard_item .name_bar p span {
+  margin-right: 5px;
+}
+
+.lboard_wrap .lboard_item .points {
+  width: 100px;
+  color: black;
+}
+
+.lboard_wrap .lboard_item .bar_wrap {
+  height: 5px;
+  width: 100%;
+  background: darkgreen;
+  border-radius: 5px;
+  margin-top: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.lboard_wrap .lboard_item .bar_wrap .inner_wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  background: #fff;
+  border-radius: 5px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
