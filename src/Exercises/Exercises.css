@@ -87,6 +87,52 @@
     font-size: 17px;
 }
 
+/* Dark Mode Styles for Exercises Page */
+body.darkmode .heading {
+    color: #fff; /* White text for heading */
+}
+
+body.darkmode .videoContainer .main-video {
+    background: #555; /* Darker gray background */
+}
+
+body.darkmode .videoContainer .main-video .title {
+    color: #eee; /* Light gray text */
+}
+
+body.darkmode .videoContainer .video-list {
+    background: #555; /* Darker gray background */
+}
+
+body.darkmode .videoContainer .video-list::-webkit-scrollbar-track {
+    background: #444; /* Darker scrollbar track */
+}
+
+body.darkmode .videoContainer .video-list::-webkit-scrollbar-thumb {
+    background: #888; /* Lighter scrollbar thumb */
+}
+
+body.darkmode .videoContainer .video-list .vid {
+    background: #444; /* Darker background for video list items */
+    border: 1px solid #666; /* Darker border */
+}
+
+body.darkmode .videoContainer .video-list .vid:hover {
+    background: #666; /* Slightly lighter hover background */
+}
+
+body.darkmode .videoContainer .video-list .vid .title {
+    color: #ccc; /* Light gray text */
+}
+
+body.darkmode .videoContainer .video-list .vid.active {
+    background: #333; /* Darker active background */
+}
+
+body.darkmode .videoContainer .video-list .vid.active .title {
+    color: #eee; /* Light gray text for active title */
+}
+
 @media (max-width:991px) {
     .videoContainer {
         grid-template-columns: 1.5fr 1fr;
