@@ -113,6 +113,7 @@ const RegisterForm = () => {
         <button type="submit" id="loginSubmit">
           Register
         </button>
+
         <a href="#" id="forgotPass">
           Forgot password?
         </a>
