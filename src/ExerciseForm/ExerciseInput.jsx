@@ -5,6 +5,12 @@ import axios from "axios";
 
 const ExerciseInput = ({ currentUser }) => {
   const navigate = useNavigate();
+
+  const userID = localStorage.getItem("userID");
+  if (!userID) {
+    throw new Error("User not authenticated");
+  }
+
   const [workout, setWorkout] = useState({
     date: new Date().toISOString().split("T")[0], // Default to today's date
     type: "",
@@ -69,12 +75,12 @@ const ExerciseInput = ({ currentUser }) => {
       const response = await axios.post(
         "http://localhost:3000/api/workouts",
         {
-          userID: currentUser?.id || null,
+          userID: userID,
           date: workout.date,
           type: workout.type,
           distance: workout.distance || null,
           time: workout.time || null,
-          pace: workout.pace || null,
+          pace: workout.pace * 100 || null,
           reps: workout.reps || null,
         },
         {

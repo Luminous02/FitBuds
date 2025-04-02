@@ -65,7 +65,7 @@ const ExerciseOutput = () => {
 
   return (
     <div className="exercise-input-wrapper">
-      <h1>Workout Log</h1>
+      <h1>Recent Workouts</h1>
       {workouts.length === 0 ? (
         <div className="no-workouts">
           <p>No workouts logged yet.</p>
@@ -77,7 +77,7 @@ const ExerciseOutput = () => {
               <div className="workout-header">
                 <h3>{workout.type}</h3>
                 <span className="workout-date">
-                  {new Date(workout.workout_date).toLocaleDateString()}
+                  {formatWorkoutDate(workout.date)}
                 </span>
               </div>
 
@@ -111,6 +111,16 @@ const ExerciseOutput = () => {
       )}
     </div>
   );
+};
+
+const formatWorkoutDate = (dateString) => {
+  try {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  } catch (error) {
+    console.error("Error formatting date:", error);
+    return "Date not available";
+  }
 };
 
 // Helper function to format time from HH:MM:SS to minutes
