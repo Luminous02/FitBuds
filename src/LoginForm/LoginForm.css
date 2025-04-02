@@ -87,6 +87,11 @@
   font-weight: 700;
 }
 
+#loginSubmit {
+  background-color: #fff;
+  color: #679436;
+}
+
 .loginWrapper .register-link {
   font-size: 14.5px;
   text-align: center;

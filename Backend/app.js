@@ -1,6 +1,7 @@
 import express from "express";
 import { checkConnection } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import workoutRoutes from "./routes/workoutRoutes.js";
 import cors from "cors";
 
 const app = express();
@@ -8,6 +9,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/workouts", workoutRoutes);
 
 app.listen(3000, async () => {
   console.log("Server running on port 3000");

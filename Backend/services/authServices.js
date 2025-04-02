@@ -24,6 +24,8 @@ export const registerUser = async (user) => {
   }
 };
 
+
+
 export const loginUser = async (credentials) => {
   try {
     // First check if username exists
@@ -46,7 +48,7 @@ export const loginUser = async (credentials) => {
     return {
       success: true,
       user: {
-        id: user.id,
+        id: user.userID,
         username: user.username,
       },
     };
@@ -58,3 +60,4 @@ export const loginUser = async (credentials) => {
     };
   }
 };
+
