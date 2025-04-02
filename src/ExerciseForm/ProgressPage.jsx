@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ExerciseInput from "./ExerciseInput";
+import ExerciseOutput from "./ExerciseOutput";
 import "./Progress.css";
 
 const ProgressPage = () => {
@@ -7,21 +9,8 @@ const ProgressPage = () => {
 
   return (
     <div className="progress-container">
-      <h1>Exercise Progress</h1>
-      <div className="progress-buttons">
-        <button
-          className="add-exercise-btn"
-          onClick={() => navigate("/dashboard/exercise-input")}
-        >
-          Add New Exercise
-        </button>
-        <button
-          className="view-exercise-btn"
-          onClick={() => navigate("/dashboard/exercise-output")}
-        >
-          View Exercise Logs
-        </button>
-      </div>
+      <ExerciseInput></ExerciseInput>
+      <ExerciseOutput></ExerciseOutput>
     </div>
   );
 };

@@ -1,7 +1,10 @@
 /*main container*/
 .progress-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr;
   text-align: center;
-  padding: 50px;
+  padding: 0px;
 }
 
 /*flexbox layout for buttons*/

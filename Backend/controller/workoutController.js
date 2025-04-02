@@ -1,4 +1,7 @@
-import { addWorkoutToDB } from "../services/workoutService.js";
+import {
+  addWorkoutToDB,
+  getWorkoutsFromDB,
+} from "../services/workoutService.js";
 
 export const addWorkout = async (req, res) => {
   const { userID, type, distance, time, pace, reps, date } = req.body;
@@ -47,6 +50,33 @@ export const addWorkout = async (req, res) => {
       success: false,
       message: "Failed to add workout",
       error: error.message,
+    });
+  }
+};
+
+export const getWorkouts = async (req, res) => {
+  try {
+    const { userID } = req.query;
+
+    if (!userID) {
+      return res.status(400).json({
+        success: false,
+        message: "User ID is required",
+      });
+    }
+
+    const workouts = await getWorkoutsFromDB(userID);
+
+    return res.status(200).json({
+      success: true,
+      workouts,
+    });
+  } catch (error) {
+    console.error("Error fetching workouts:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch workouts",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
     });
   }
 };

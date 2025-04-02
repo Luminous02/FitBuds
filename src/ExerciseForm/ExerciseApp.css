@@ -1,5 +1,7 @@
 .exercise-input-wrapper {
-  width: 420px;
+  max-width: 100%;
+  width: 80%;
+  max-height: 100%;
   background: #8fab71;
   border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(30px);
@@ -11,6 +13,7 @@
 }
 
 .exercise-input-wrapper h1 {
+  color: #2c3e50;
   font-size: 28px;
   text-align: center;
 }
@@ -59,7 +62,6 @@
 }
 
 .exercise-input-wrapper {
-  max-width: 500px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -96,6 +98,7 @@ button[type="submit"]:hover {
 }
 
 .exercise-input-container {
+  height: max-content;
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
@@ -160,4 +163,81 @@ button[type="submit"]:hover {
     padding: 1rem;
     margin: 1rem;
   }
+}
+
+/* Workout List Styles */
+.workout-list {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.workout-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.workout-card:hover {
+  transform: translateY(-2px);
+}
+
+.workout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.workout-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.workout-date {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.workout-details p {
+  margin: 0.5rem 0;
+  color: #34495e;
+}
+
+.no-workouts {
+  text-align: center;
+  padding: 2rem;
+}
+
+.add-workout-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #3498db;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.add-workout-link:hover {
+  background-color: #2980b9;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #3498db;
+  text-decoration: none;
+}
+
+.error-message {
+  color: #e74c3c;
+  background-color: #fadbd8;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
 }

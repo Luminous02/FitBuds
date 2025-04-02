@@ -46,7 +46,7 @@ export const loginUser = async (credentials) => {
     return {
       success: true,
       user: {
-        id: user.id,
+        id: user.userID,
         username: user.username,
       },
     };

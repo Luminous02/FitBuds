@@ -43,3 +43,17 @@ function formatTimeForMySQL(minutes) {
     .toString()
     .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
 }
+
+export const getWorkoutsFromDB = async (userID) => {
+  try {
+    const [workouts] = await pool.query(
+      "SELECT * FROM workouts WHERE userID = ? ORDER BY date DESC",
+      [userID]
+    );
+
+    return workouts;
+  } catch (error) {
+    console.error("Database error in getWorkoutsFromDB:", error);
+    throw error;
+  }
+};

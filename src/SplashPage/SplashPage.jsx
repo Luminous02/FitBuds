@@ -6,6 +6,8 @@ import { FaL } from "react-icons/fa6";
 
 const Splash = () => {
   const navigate = useNavigate();
+  localStorage.removeItem("user");
+  localStorage.removeItem("userID");
 
   const navigateLogin = () => {
     navigate("/login");
