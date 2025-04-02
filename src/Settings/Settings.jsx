@@ -3,45 +3,21 @@ import "./Settings.css";
 
 const Settings = () => {
     // Load saved settings or use default values
-  const [settings, setSettings] = useState({
-    name: "",
-    email: "",
-    password: "",
-    unitTime: "minutes",
-    unitWeight: "lbs",
-    difficulty: "medium",
-    notifications: true,
-    privateProfile: false,
+  const [settings, setSettings] = useState(() => {
+    const savedSettings = localStorage.getItem("exerciseAppSettings");
+    return savedSettings
+      ? JSON.parse(savedSettings)
+      : {
+          name: "",
+          email: "",
+          password: "",
+          unitTime: "minutes",
+          unitWeight: "lbs",
+          difficulty: "medium",
+          notifications: true,
+          privateProfile: false,
+        };
   });
-
-  // Fetch user data from the backend
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/auth/user-info", {
-          method: "GET",
-          credentials: "include", // Assuming you're using cookies or session for authentication
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.success) {
-            setSettings((prevSettings) => ({
-              ...prevSettings,
-              name: data.user.fname, // Assuming the user's first name is in `fname`
-              email: data.user.email,
-            }));
-          }
-        } else {
-          console.error("Failed to fetch user data");
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -69,30 +45,15 @@ const Settings = () => {
           <h2>Profile Settings</h2>
           <label>
             Name:
-            <input 
-              type="text" 
-              name="name" 
-              value={settings.name} 
-              onChange={handleChange} 
-            />
+            <input type="text" name="name" value={settings.name} onChange={handleChange} />
           </label>
           <label>
             Email:
-            <input 
-              type="email" 
-              name="email" 
-              value={settings.email} 
-              onChange={handleChange} 
-            />
+            <input type="email" name="email" value={settings.email} onChange={handleChange} />
           </label>
           <label>
             New Password:
-            <input 
-              type="password" 
-              name="password" 
-              value={settings.password} 
-              onChange={handleChange} 
-            />
+            <input type="password" name="password" value={settings.password} onChange={handleChange} />
           </label>
         </section>
 
@@ -128,12 +89,7 @@ const Settings = () => {
           <h2>Notifications</h2>
           <label>
             Enable Notifications:
-            <input 
-              type="checkbox" 
-              name="notifications" 
-              checked={settings.notifications} 
-              onChange={handleChange} 
-            />
+            <input type="checkbox" name="notifications" checked={settings.notifications} onChange={handleChange} />
           </label>
         </section>
 
@@ -142,12 +98,7 @@ const Settings = () => {
           <h2>Privacy & Security</h2>
           <label>
             Private Profile:
-            <input 
-              type="checkbox" 
-              name="privateProfile" 
-              checked={settings.privateProfile} 
-              onChange={handleChange} 
-            />
+            <input type="checkbox" name="privateProfile" checked={settings.privateProfile} onChange={handleChange} />
           </label>
         </section>
 

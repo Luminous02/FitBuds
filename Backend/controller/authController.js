@@ -1,6 +1,5 @@
 import userModel from "../models/userModel.js";
 import { registerUser, loginUser } from "../services/authServices.js";
-import { pool } from "../config/db.js";
 
 export const register = async (req, res) => {
   const { email, username, password, fname, bday } = req.body;
@@ -62,19 +61,29 @@ export const login = async (req, res) => {
   }
 };
 
+// Define the getUserInfo function
 export const getUserInfo = async (req, res) => {
-  const userId = req.userId;
-
+  const userId = req.user.id; // Assuming the user ID is stored in the request after authentication
+  
   try {
-    const [userRows] = await pool.query("SELECT email, fname FROM userData WHERE id = ?", [userId]);
-
-    if(userRows.length === 0) {
-      return res.status(404).json({ success: false, message: "User not found"});
+    const user = await userModel.getUserById(userId); // Assuming you have this method in userModel
+    
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
     }
 
-    return res.status(200).json({ success: true, user: userRows[0] });
+    return res.status(200).json({
+      success: true,
+      user,
+    });
   } catch (error) {
-    console.error("Error fetching user info", error);
-    return res.status(500).json({ success: false, message: "Internal server error" });
+    console.error("Error retrieving user info:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error retrieving user info",
+    });
   }
 };
