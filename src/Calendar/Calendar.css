@@ -479,6 +479,67 @@
   pointer-events: none;
 }
 
+body.darkmode .container {
+  background-color: #555;
+}
+
+body.darkmode .calendar {
+  color: #fff;
+  background-color: #3a3a3a;
+}
+
+body.darkmode .calendar .month .prev:hover,
+body.darkmade .calendar .month .next:hover {
+  color: white;
+}
+
+body.darkmode .calendar .days .day {
+  color: rgb(86, 175, 86);
+  border: 1px solid #f5f5f5;
+}
+
+body.darkmode .calendar .day:not(.prev-date, .next-date):hover {
+  color: #fff;
+  background-color: var(--primary-clr);
+}
+
+body.darkmode .calendar .days .prev-date,
+body.darkmode .calendar .days .next-date {
+  color: #b2b2b2;
+}
+
+body.darkmode .calendar .days .active {
+  color: #fff;
+  background-color: var(--primary-clr);
+}
+
+body.darkmode .calendar .goto-today .goto input {
+  background-color: transparent;
+}
+
+body.darkmode .today-date .event-day {
+  color: white;
+}
+
+.today-date .event-date {
+  color: white;
+}
+
+body.darkmode .events .event {
+  color: #ffffff;
+  background: linear-gradient(90deg, rgb(53, 53, 53), transparent);
+}
+
+body.darkmode .events .event:hover {
+  background: linear-gradient(90deg, #ffffff, transparent);
+}
+
+body.darkmode .events .event:hover,
+body.darkmode .events .event:hover .title i,
+body.darkmode .events .event:hover .event-time {
+  color: black;
+}
+
 @media (max-width: 1000px) {
   body {
     align-items: flex-start;
