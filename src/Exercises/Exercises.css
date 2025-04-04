@@ -105,11 +105,11 @@ body.darkmode .videoContainer .video-list {
 }
 
 body.darkmode .videoContainer .video-list::-webkit-scrollbar-track {
-    background: #444; /* Darker scrollbar track */
+    background: #adadad; /* Darker scrollbar track */
 }
 
 body.darkmode .videoContainer .video-list::-webkit-scrollbar-thumb {
-    background: #888; /* Lighter scrollbar thumb */
+    background: #f2f1f1; /* Lighter scrollbar thumb */
 }
 
 body.darkmode .videoContainer .video-list .vid {
