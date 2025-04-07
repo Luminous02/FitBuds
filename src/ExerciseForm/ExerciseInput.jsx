@@ -3,7 +3,7 @@ import "./ExerciseApp.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const ExerciseInput = ({ currentUser }) => {
+const ExerciseInput = ({ onWorkoutAdded }) => {
   const navigate = useNavigate();
 
   const userID = localStorage.getItem("userID");
@@ -100,16 +100,14 @@ const ExerciseInput = ({ currentUser }) => {
           pace: "",
           reps: "",
         });
-        navigate("/dashboard/progress");
+        if (onWorkoutAdded) {
+          onWorkoutAdded();
+        }
       } else {
         setError(response.data.message || "Failed to save workout");
       }
     } catch (error) {
-      console.error("Error saving workout:", error);
-      setError(
-        error.response?.data?.message ||
-          "An error occurred while saving your workout. Please try again."
-      );
+      setError(error.response?.data?.message || "Error saving workout");
     } finally {
       setIsSubmitting(false);
     }
