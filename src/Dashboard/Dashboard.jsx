@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaUser } from "react-icons/fa";
 import {
   BrowserRouter as Router,
   Routes,
@@ -55,7 +56,6 @@ const Dashboard = () => {
   const toggleSidebar = () => {
     setSidebarActive(!sidebarActive);
   };
-
   return (
     <div className="dashboard-container">
       <header>
@@ -81,12 +81,12 @@ const Dashboard = () => {
           <i className="bx bx-menu" id="btn" onClick={toggleSidebar}></i>
         </div>
         <div className="user">
-          <img
-            src="user-circle-regular-24.png"
-            alt="User"
-            className="user-img"
-          />
-          <div>
+          <div className="user-icon-wrapper">
+            <div className="user-icon-container">
+              <FaUser className="user-icon" />
+            </div>
+          </div>
+          <div className="user-info">
             <p className="bold">{user}</p>
             <p>Parent</p>
           </div>

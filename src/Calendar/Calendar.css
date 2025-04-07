@@ -115,24 +115,21 @@
 }
 
 .calendar .days .active {
-  position: relative;
-  font-size: 2rem;
-  color: #fff;
-  background-color: var(--primary-clr);
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
 }
 
 .calendar .days .active::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 0 10px 2px var(--primary-clr);
+  content: none;
 }
 
 .calendar .days .today {
-  font-size: 2rem;
+  position: relative;
+  font-weight: bold;
+  color: var(--primary-clr);
+  border: 2px solid var(--primary-clr) !important;
+  background-color: transparent !important;
 }
 
 .calendar .days .event {
@@ -140,15 +137,7 @@
 }
 
 .calendar .days .event::after {
-  content: "";
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  width: 75%;
-  height: 6px;
-  border-radius: 30px;
-  transform: translateX(-50%);
-  background-color: var(--primary-clr);
+  bottom: 5px;
 }
 
 .calendar .event:hover::after {
@@ -533,4 +522,26 @@
   .right .today-date {
     padding: 20px;
   }
+}
+
+.calendar .days .selected {
+  position: relative;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: var(--primary-clr) !important;
+}
+
+.calendar .days .selected::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 10px 2px var(--primary-clr);
+}
+
+.calendar .days .selected.event::after {
+  background-color: #fff;
+  bottom: 10px;
 }

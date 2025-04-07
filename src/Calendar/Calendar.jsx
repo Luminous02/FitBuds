@@ -48,45 +48,72 @@ const Calendar = () => {
 
       let days = "";
 
+      // Previous month's days
       for (let x = day; x > 0; x--) {
         days += `<div class="day prev-date">${prevDays - x + 1}</div>`;
       }
 
+      // Current month's days
       for (let i = 1; i <= lastDate; i++) {
+        const date = new Date(year, month, i);
+        const isToday =
+          i === new Date().getDate() &&
+          month === new Date().getMonth() &&
+          year === new Date().getFullYear();
+
+        const isSelected =
+          selectedDate.getDate() === i &&
+          selectedDate.getMonth() === month &&
+          selectedDate.getFullYear() === year;
+
         let event = eventsArr.some(
           (event) =>
             event.day === i && event.month === month + 1 && event.year === year
         );
-        let isActive =
-          i === new Date().getDate() &&
-          month === new Date().getMonth() &&
-          year === new Date().getFullYear();
         days += `<div class="day ${event ? "event" : ""} ${
-          isActive ? "active" : ""
-        }" data-day="${i}">${i}</div>`;
+          isToday ? "today" : ""
+        } ${isSelected ? "selected" : ""}" data-day="${i}">${i}</div>`;
       }
 
+      // Next month's days
       for (let j = 1; j <= nextDays; j++) {
         days += `<div class="day next-date">${j}</div>`;
       }
 
       daysContainer.innerHTML = days;
 
-      daysContainer.querySelectorAll(".day").forEach((dayElement) => {
-        dayElement.addEventListener("click", () => {
-          const day = parseInt(dayElement.dataset.day); // Get the day from data-day
-          if (!isNaN(day)) {
-            handleDayClick(day);
-          }
+      // Add click event listeners to all days
+      daysContainer
+        .querySelectorAll(".day:not(.prev-date, .next-date)")
+        .forEach((dayElement) => {
+          dayElement.addEventListener("click", () => {
+            const day = parseInt(dayElement.dataset.day);
+            if (!isNaN(day)) {
+              handleDayClick(day);
+
+              // Update selected class on all days
+              daysContainer.querySelectorAll(".day").forEach((dayEl) => {
+                dayEl.classList.remove("selected");
+              });
+              dayElement.classList.add("selected");
+            }
+          });
         });
-      });
+
+      // Ensure today is visible if it's in current view
+      const today = new Date();
+      if (month === today.getMonth() && year === today.getFullYear()) {
+        const todayElement = daysContainer.querySelector(".day.today");
+        todayElement?.scrollIntoView({ block: "nearest" });
+      }
     }
 
     initCalendar();
   }, [month, year, eventsArr]);
 
   const handleDayClick = (day) => {
-    setSelectedDate(new Date(year, month, day));
+    const newSelectedDate = new Date(year, month, day);
+    setSelectedDate(newSelectedDate);
   };
 
   const getDayOfWeek = (date) => {
@@ -124,7 +151,17 @@ const Calendar = () => {
               <input type="text" placeholder="mm/yyyy" className="date-input" />
               <button className="goto-btn">Go</button>
             </div>
-            <button className="today-btn">Today</button>
+            <button
+              className="today-btn"
+              onClick={() => {
+                const today = new Date();
+                setMonth(today.getMonth());
+                setYear(today.getFullYear());
+                setSelectedDate(today);
+              }}
+            >
+              Today
+            </button>
           </div>
         </div>
       </div>
@@ -164,6 +201,7 @@ const Calendar = () => {
                 className="event-time-to"
               />
             </div>
+
           </div>
           <div className="add-event-footer">
             <button className="add-event-btn">Add Event</button>
