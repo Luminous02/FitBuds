@@ -70,7 +70,6 @@ const Calendar = () => {
           (event) =>
             event.day === i && event.month === month + 1 && event.year === year
         );
-
         days += `<div class="day ${event ? "event" : ""} ${
           isToday ? "today" : ""
         } ${isSelected ? "selected" : ""}" data-day="${i}">${i}</div>`;
@@ -202,6 +201,7 @@ const Calendar = () => {
                 className="event-time-to"
               />
             </div>
+
           </div>
           <div className="add-event-footer">
             <button className="add-event-btn">Add Event</button>

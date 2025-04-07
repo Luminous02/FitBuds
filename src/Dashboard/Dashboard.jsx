@@ -56,7 +56,6 @@ const Dashboard = () => {
   const toggleSidebar = () => {
     setSidebarActive(!sidebarActive);
   };
-
   return (
     <div className="dashboard-container">
       <header>
