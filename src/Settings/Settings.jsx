@@ -21,14 +21,14 @@ const Settings = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/user/${userID}`);
-        const { fname, email, unitTime, unitWeight, difficulty, notifications, privateProfile } = response.data.user;
+        const response = await axios.get(`http://localhost:3000/api/auth/user/${userID}`);
+        const { name, email, unitTime, unitWeight, difficulty, notifications, privateProfile } = response.data.user;
 
         setSettings((prevSettings) => ({
           ...prevSettings,
-          name: fname,
+          name: name,
           email,
-          unitTime: time || "minutes",
+          unitTime: unitTime || "minutes",
           unitWeight: unitWeight || "lbs",
           difficulty: difficulty || "medium",
           notifications: notifications !== undefined ? notifications : true,

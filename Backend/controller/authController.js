@@ -1,5 +1,6 @@
 import userModel from "../models/userModel.js";
 import { registerUser, loginUser } from "../services/authServices.js";
+import { pool } from "../config/db.js"
 
 export const register = async (req, res) => {
   const { email, username, password, fname, bday } = req.body;
@@ -70,18 +71,23 @@ export const getUser = async (req, res) => {
   }
 
   try {
+    console.log("Fetching user with ID:", userID); 
     const [userRows] = await pool.query(
       `SELECT u.email, u.fname AS name, u.bday, a.username 
       FROM userData u 
-      JOIN accounts a ON u.email = a.username
+      JOIN accounts a ON u.userID = a.userID
       WHERE a.userID = ?`,
       [userID]
     );
 
+    console.log("Query result:", userRows);
+
     if (userRows.length === 0) {
+      console.log("No user found for ID:", userID);
       return res.status(404).json({ success: false, message: "User not found" });
     }
 
+    console.log("User data found:", userRows[0]);
     return res.status(200).json({ success: true, user: userRows[0] });
   } catch (error) {
     console.error("Error fetching user data:", error);
