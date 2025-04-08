@@ -12,12 +12,23 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+body.darkmode .feedCard {
+  background: #3d3d3d;
+  border: none;
+  box-shadow: 0 0 10px #d0ff9d;
+  color: white;
+}
+
 .feedCard h3 {
   font-size: x-large;
 }
 
 .feedCard h5 {
   color: #3d3d3d;
+}
+
+body.darkmode .feedCard h5 {
+  color: #d0ff9d;
 }
 
 .cardUserData {
@@ -62,4 +73,10 @@
   width: 25%;
   border: transparent;
   color: #3d3d3d;
+}
+
+body.darkmode #moreButton,
+body.darkmode #likeButton,
+body.darkmode #shareButton {
+  color: #d0ff9d;
 }
