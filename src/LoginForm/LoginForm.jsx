@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LoginForm.css";
 import { FaUser, FaLock } from "react-icons/fa";
 import { useNavigate, Link } from "react-router-dom";
@@ -17,6 +17,13 @@ const LoginForm = () => {
     navigate("/Dashboard");
   };
 
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      navDashboard();
+    }
+  }, [navigate]);
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -32,7 +39,11 @@ const LoginForm = () => {
         formValues
       );
 
+      console.log("Login response:", response.data);
+
       if (response.data.success) {
+        localStorage.setItem("userID", response.data.user.id);
+        localStorage.setItem("user", response.data.user.username);
         navDashboard();
       } else {
         setError(response.data.message || "Login failed");
@@ -86,7 +97,9 @@ const LoginForm = () => {
           </Link>
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit" id="loginSubmit">
+          Login
+        </button>
 
         <div className="register-link">
           <p>Don't have an account?</p>

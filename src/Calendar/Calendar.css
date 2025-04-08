@@ -115,24 +115,21 @@
 }
 
 .calendar .days .active {
-  position: relative;
-  font-size: 2rem;
-  color: #fff;
-  background-color: var(--primary-clr);
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
 }
 
 .calendar .days .active::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 0 10px 2px var(--primary-clr);
+  content: none;
 }
 
 .calendar .days .today {
-  font-size: 2rem;
+  position: relative;
+  font-weight: bold;
+  color: var(--primary-clr);
+  border: 2px solid var(--primary-clr) !important;
+  background-color: transparent !important;
 }
 
 .calendar .days .event {
@@ -140,15 +137,7 @@
 }
 
 .calendar .days .event::after {
-  content: "";
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  width: 75%;
-  height: 6px;
-  border-radius: 30px;
-  transform: translateX(-50%);
-  background-color: var(--primary-clr);
+  bottom: 5px;
 }
 
 .calendar .event:hover::after {
@@ -244,7 +233,7 @@
 }
 
 .today-date .event-date {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 400;
   color: darkgreen;
 }
@@ -625,4 +614,69 @@ body.darkmode .add-event {
   .right .today-date {
     padding: 20px;
   }
+}
+
+.calendar .days .selected {
+  position: relative;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: var(--primary-clr) !important;
+}
+
+.calendar .days .selected::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 10px 2px var(--primary-clr);
+}
+
+.calendar .days .selected.event::after {
+  background-color: #fff;
+  bottom: 10px;
+}
+
+/* Workout items styling */
+.workout-item {
+  background: white;
+  color: #34495e;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.workout-item h4 {
+  margin-top: 0;
+  color: var(--primary-clr);
+  text-transform: capitalize;
+}
+
+.workout-item p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.loading,
+.no-events {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+/* Right panel styling */
+.right {
+  padding: 20px;
+  border-radius: 0 8px 8px 0;
+}
+
+.darkmode .right {
+  background: #2c2c2c;
+}
+
+.darkmode .workout-item {
+  background: #3a3a3a;
+  color: white;
 }
