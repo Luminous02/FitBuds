@@ -63,6 +63,10 @@ body.darkmode .leaderScroll .leaderboardGrid {
   background-color: #000000;
 }
 
+body.darkmode .leaderScroll .leaderboardGrid {
+  background-color: #000000;
+}
+
 .gradientBlockLeft {
   z-index: 100;
   height: 25px;
