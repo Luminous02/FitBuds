@@ -207,7 +207,7 @@
 .container .right {
   position: relative;
   width: 40%;
-  min-height: 100%;
+  min-height: inherit;
   padding: 20px 0;
 }
 
@@ -239,7 +239,7 @@
 }
 
 .events {
-  width: 100%;
+  width: 94%;
   height: 100%;
   max-height: 600px;
   overflow-x: hidden;
@@ -247,6 +247,8 @@
   display: flex;
   flex-direction: column;
   padding: 4px;
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
 .events .event {
