@@ -202,7 +202,6 @@ const Calendar = () => {
             {selectedDate.getFullYear()}
           </div>
         </div>
-
         <div className="events">
           {loading ? (
             <div className="loading">Loading workouts...</div>
