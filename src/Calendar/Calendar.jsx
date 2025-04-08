@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
+import axios from "axios";
 import "./Calendar.css";
 
 const Calendar = () => {
@@ -8,6 +8,8 @@ const Calendar = () => {
   const [year, setYear] = useState(new Date().getFullYear());
   const [eventsArr, setEventsArr] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [workouts, setWorkouts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const months = [
     "January",
@@ -111,6 +113,33 @@ const Calendar = () => {
     initCalendar();
   }, [month, year, eventsArr]);
 
+  useEffect(() => {
+    fetchWorkoutsForDate(selectedDate);
+  }, [selectedDate]);
+
+  const fetchWorkoutsForDate = async (date) => {
+    try {
+      setLoading(true);
+      const userID = localStorage.getItem("userID");
+      if (!userID) return;
+
+      const dateStr = date.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+      const response = await axios.get(
+        `http://localhost:3000/api/workouts/date?userID=${userID}&date=${dateStr}`
+      );
+
+      console.log("API Response:", response.data);
+
+      if (response.data.success) {
+        setWorkouts(response.data.workouts);
+      }
+    } catch (error) {
+      console.error("Error fetching workouts:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleDayClick = (day) => {
     const newSelectedDate = new Date(year, month, day);
     setSelectedDate(newSelectedDate);
@@ -167,45 +196,28 @@ const Calendar = () => {
       </div>
       <div className="right">
         <div className="today-date">
-          <div className="event-day">{getDayOfWeek(selectedDate)}</div>
+          <div className="event-day">{daysOfWeek[selectedDate.getDay()]}</div>
           <div className="event-date">
             {selectedDate.getDate()} {months[selectedDate.getMonth()]}{" "}
             {selectedDate.getFullYear()}
           </div>
         </div>
-        <div className="events"></div>
-        <div className="add-event-wrapper">
-          <div className="add-event-header">
-            <div className="title">Add Event</div>
-            <i className="fas fa-times close"></i>
-          </div>
-          <div className="add-event-body">
-            <div className="add-event-input">
-              <input
-                type="text"
-                placeholder="Event Name"
-                className="event-name"
-              />
-            </div>
-            <div className="add-event-input">
-              <input
-                type="text"
-                placeholder="Event Time From"
-                className="event-time-from"
-              />
-            </div>
-            <div className="add-event-input">
-              <input
-                type="text"
-                placeholder="Event Time To"
-                className="event-time-to"
-              />
-            </div>
-
-          </div>
-          <div className="add-event-footer">
-            <button className="add-event-btn">Add Event</button>
-          </div>
+        <div className="events">
+          {loading ? (
+            <div className="loading">Loading workouts...</div>
+          ) : workouts.length === 0 ? (
+            <div className="no-events">No workouts for this day</div>
+          ) : (
+            workouts.map((workout) => (
+              <div key={workout.workoutID} className="workout-item">
+                <h4>{workout.type}</h4>
+                {workout.distance && <p>Distance: {workout.distance} miles</p>}
+                {workout.time && <p>Duration: {workout.time}</p>}
+                {workout.pace && <p>Pace: {workout.pace} min/mile</p>}
+                {workout.reps && <p>Reps: {workout.reps}</p>}
+              </div>
+            ))
+          )}
         </div>
       </div>
       <Link to="/Dashboard/progress" className="add-event">
