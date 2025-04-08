@@ -14,6 +14,11 @@
   position: relative;
 }
 
+body.darkmode .lboard_section {
+  background: #3d3d3d;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
 .lboard_tabs .tabs {
   display: flex; /* Add flexbox to container */
   justify-content: space-between; /* Space items out */
@@ -35,8 +40,18 @@
   cursor: pointer;
 }
 
-.lboard_section ul li:hover, .lboard_section ul li.active {
+body.darkmode .lboard_section ul li {
+  color: white;
+}
+
+.lboard_section ul li:hover,
+.lboard_section ul li.active {
   color: #8fab71;
+}
+
+body.darkmode .lboard_section ul li:hover, 
+body.darkmode .lboard_section ul li.active {
+  color: #d0ff9d;
 }
 
 .lboard_section .sports {
@@ -46,6 +61,10 @@
   color: black;
   cursor: pointer;
   margin-left: auto; /* Push sports to right */
+}
+
+body.darkmode .lboard_section .sports {
+  color: white;
 }
 
 .lboard_wrap {
@@ -60,6 +79,11 @@
   overflow-y: auto;
 }
 
+body.darkmode .lboard_wrap {
+  background: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
 .lboard_wrap .lboard_item {
   padding: 15px;
 }
@@ -69,6 +93,10 @@
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid darkgreen;
+}
+
+body.darkmode .lboard_wrap .lboard_item .lboard_mem {
+  border-bottom: 1px solid #d0ff9d;
 }
 
 .lboard_wrap .lboard_item .lboard_mem:first-child {
@@ -99,6 +127,10 @@
   color: black;
 }
 
+body.darkmode .lboard_wrap .lboard_item .name_bar p {
+  color: white;
+}
+
 .lboard_wrap .lboard_item .name_bar p span {
   margin-right: 5px;
 }
@@ -108,14 +140,23 @@
   color: black;
 }
 
+body.darkmode .lboard_wrap .lboard_item .points {
+  width: 100px;
+  color: white;
+}
+
 .lboard_wrap .lboard_item .bar_wrap {
   height: 5px;
   width: 100%;
-  background: darkgreen;
+  background: white;
   border-radius: 5px;
   margin-top: 5px;
   position: relative;
   overflow: hidden;
+}
+
+body.darkmode .lboard_wrap .lboard_item .bar_wrap {
+  background: rgb(147, 147, 147);
 }
 
 .lboard_wrap .lboard_item .bar_wrap .inner_wrap {
@@ -123,8 +164,12 @@
   top: 0;
   left: 0;
   height: 5px;
-  background: #fff;
+  background: darkgreen;
   border-radius: 5px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
+}
+
+body.darkmode .lboard_wrap .lboard_item .bar_wrap .inner_wrap {
+  background: #d0ff9d;
 }
