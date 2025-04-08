@@ -60,3 +60,32 @@ export const login = async (req, res) => {
     });
   }
 };
+
+export const getUser = async (req, res) => {
+  const userID = req.params.id;
+  console.log("Fetching user with ID:", userID);
+
+  if(!userID) {
+    return res.status(400).json({ success: false, message: "User ID is required"});
+  }
+
+  try {
+    const [userRows] = await pool.query(
+      `SELECT u.email, u.fname AS name, u.bday, a.username 
+      FROM userData u 
+      JOIN accounts a ON u.email = a.username
+      WHERE a.userID = ?`,
+      [userID]
+    );
+
+    if (userRows.length === 0) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    return res.status(200).json({ success: true, user: userRows[0] });
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return res.status(500).json({ success: false, message: "Failed to fetch user data" });
+    
+  }
+};

@@ -1,23 +1,48 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import "./Settings.css";
 
 const Settings = () => {
     // Load saved settings or use default values
-  const [settings, setSettings] = useState(() => {
-    const savedSettings = localStorage.getItem("exerciseAppSettings");
-    return savedSettings
-      ? JSON.parse(savedSettings)
-      : {
-          name: "",
-          email: "",
-          password: "",
-          unitTime: "minutes",
-          unitWeight: "lbs",
-          difficulty: "medium",
-          notifications: true,
-          privateProfile: false,
-        };
+  const [settings, setSettings] = useState({
+    name: "",
+    email: "",
+    password: "",
+    unitTime: "minutes",
+    unitWeight: "lbs",
+    difficulty: "medium",
+    notifications: true,
+    privateProfile: false,
   });
+
+  const userID = localStorage.getItem("userID");
+  console.log("userID from localStorage:", userID);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/user/${userID}`);
+        const { fname, email, unitTime, unitWeight, difficulty, notifications, privateProfile } = response.data.user;
+
+        setSettings((prevSettings) => ({
+          ...prevSettings,
+          name: fname,
+          email,
+          unitTime: time || "minutes",
+          unitWeight: unitWeight || "lbs",
+          difficulty: difficulty || "medium",
+          notifications: notifications !== undefined ? notifications : true,
+          privateProfile: privateProfile !== undefined ? privateProfile : false,
+        }));
+      } catch (error) {
+        console.error("Failed to fetch user data:", error);
+      }
+    };
+
+    if (userID) {
+      fetchUserData();
+    }
+  }, [userID]);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -29,31 +54,42 @@ const Settings = () => {
   };
 
   // Save settings to localStorage when updated
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("exerciseAppSettings", JSON.stringify(settings));
-    alert("Settings saved successfully!");
+    try {
+      await axios.put(`http://localhost:3000/api/user/${userID}/settings`, settings);
+      alert("Settings saved successfully!");
+    } catch (error) {
+      console.error("Failed to save settings:", error);
+      alert("Failed to save settings. Please try again.");
+    }
   };
 
   return (
     <div className="settings-container">
       <h1>Settings</h1>
-      <form onSubmit={handleSubmit}>
+      {/* Profile Information (Read-only) */}
+      <section className="settings-section">
+        <h2>User Information</h2>
+        <div className="user-info">
+          <p><strong>Name:</strong> {settings.name}</p>
+          <p><strong>Email:</strong> {settings.email}</p>
+        </div>
+      </section>
 
-        {/* Profile Settings */}
+      {/* Form for Editable Settings */}
+      <form onSubmit={handleSubmit}>
+        {/* Password Change */}
         <section className="settings-section">
-          <h2>Profile Settings</h2>
-          <label>
-            Name:
-            <input type="text" name="name" value={settings.name} onChange={handleChange} />
-          </label>
-          <label>
-            Email:
-            <input type="email" name="email" value={settings.email} onChange={handleChange} />
-          </label>
+          <h2>Change Password</h2>
           <label>
             New Password:
-            <input type="password" name="password" value={settings.password} onChange={handleChange} />
+            <input 
+              type="password" 
+              name="password" 
+              value={settings.password} 
+              onChange={handleChange} 
+            />
           </label>
         </section>
 

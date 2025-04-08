@@ -50,3 +50,10 @@
     background: #042d04;
   }
   
+  .user-info {
+    margin-bottom: 20px;
+  }
+  
+  .user-info p {
+    margin: 10px 0;
+  }

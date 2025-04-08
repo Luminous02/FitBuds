@@ -5,7 +5,11 @@ import workoutRoutes from "./routes/workoutRoutes.js";
 import cors from "cors";
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173", // Allow only this origin
+  methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+  credentials: true, // If you need to send cookies or authentication headers
+}));
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
