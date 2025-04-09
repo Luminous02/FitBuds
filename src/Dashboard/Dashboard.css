@@ -112,6 +112,8 @@ header {
 }
 
 .sidebar .top .logo {
+  font-size: 1.2rem;
+  font-weight: bolder;
   color: white;
   display: flex;
   height: 50px;
@@ -365,4 +367,9 @@ header {
   width: 36px;
   height: 36px;
   margin: 0 auto;
+}
+
+#logoWhite {
+  width: 3rem;
+  margin-right: 5%;
 }

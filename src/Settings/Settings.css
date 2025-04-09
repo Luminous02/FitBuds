@@ -1,0 +1,59 @@
+.settings-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: rgb(80, 136, 64);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+  
+  .settings-h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .settings-section {
+    margin-bottom: 20px;
+  }
+  
+  .settings-section h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  input,
+  select {
+    padding: 8px;
+    font-size: 14px;
+    width: 60%;
+  }
+  
+  .save-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background: #72f574;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .save-btn:hover {
+    background: #042d04;
+  }
+  
+  .user-info {
+    margin-bottom: 20px;
+  }
+  
+  .user-info p {
+    margin: 10px 0;
+  }

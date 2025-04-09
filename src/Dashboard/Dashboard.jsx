@@ -74,7 +74,7 @@ const Dashboard = () => {
       <div className={`sidebar ${sidebarActive ? "active" : ""}`}>
         <div className="top">
           <div className="logo">
-            <i className="bx bxl-foursquare"></i>
+            <img src="/fitBudsLogoWhite.svg" id="logoWhite"></img>
             <span>FitBuds</span>
           </div>
           <i className="bx bx-menu" id="btn" onClick={toggleSidebar}></i>

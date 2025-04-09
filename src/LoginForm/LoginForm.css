@@ -118,3 +118,7 @@
 .loginWrapper .error-message {
   color: #ff4848;
 }
+
+#loginCheckbox {
+  width: 10%;
+}
