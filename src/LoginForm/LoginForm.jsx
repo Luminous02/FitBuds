@@ -23,7 +23,7 @@ const LoginForm = () => {
       navDashboard();
     }
   }, [navigate]);
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -89,7 +89,7 @@ const LoginForm = () => {
 
         <div className="remember-forgot">
           <label>
-            <input type="checkbox" />
+            <input type="checkbox" id="loginCheckbox" />
             Remember me
           </label>
           <Link to="/forgot-password" id="forgotPass">
