@@ -73,7 +73,7 @@ export const getUser = async (req, res) => {
   try {
     console.log("Fetching user with ID:", userID); 
     const [userRows] = await pool.query(
-      `SELECT u.email, u.fname AS name, u.bday, a.username 
+      `SELECT u.email, u.fname AS name, u.bday, a.username, u.unitTime, u.unitWeight, u.difficulty, u.notifications, u.privateProfile 
       FROM userData u 
       JOIN accounts a ON u.userID = a.userID
       WHERE a.userID = ?`,
@@ -93,5 +93,32 @@ export const getUser = async (req, res) => {
     console.error("Error fetching user data:", error);
     return res.status(500).json({ success: false, message: "Failed to fetch user data" });
     
+  }
+};
+
+export const updateUserSettings = async (req, res) => {
+  const userID = req.params.id;
+  const { unitTime, unitWeight, difficulty, notifications, privateProfile } = req.body;
+
+  if (!userID) {
+    return res.status(400).json({ success: false, message: "User ID is required" });
+  }
+
+  try {
+    const [result] = await pool.query(
+      `UPDATE userData 
+       SET unitTime = ?, unitWeight = ?, difficulty = ?, notifications = ?, privateProfile = ?
+       WHERE userID = ?`,
+      [unitTime, unitWeight, difficulty, notifications, privateProfile, userID]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    return res.status(200).json({ success: true, message: "Settings updated successfully" });
+  } catch (error) {
+    console.error("Error updating settings:", error);
+    return res.status(500).json({ success: false, message: "Failed to update settings" });
   }
 };

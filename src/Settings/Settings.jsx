@@ -57,10 +57,17 @@ const Settings = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/api/user/${userID}/settings`, settings);
+      const updatedSettings = {
+        unitTime: settings.unitTime,
+        unitWeight: settings.unitWeight,
+        difficulty: settings.difficulty,
+        notifications: settings.notifications,
+        privateProfile: settings.privateProfile,
+      };
+      await axios.put(`http://localhost:3000/api/auth/user/${userID}/settings`, settings);
       alert("Settings saved successfully!");
     } catch (error) {
-      console.error("Failed to save settings:", error);
+      console.error("Failed to save settings:", error.response?.data || error.message);
       alert("Failed to save settings. Please try again.");
     }
   };
