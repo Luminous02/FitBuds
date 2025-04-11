@@ -2,7 +2,7 @@ import express from "express";
 import {
   addWorkout,
   getWorkouts,
-  //getCalWorkouts,
+  getCalWorkouts,
 } from "../controller/workoutController.js";
 
 const router = express.Router();
@@ -10,6 +10,6 @@ const router = express.Router();
 // POST /api/workouts
 router.post("/", addWorkout);
 router.get("/", getWorkouts);
-//router.get("/date", getCalWorkouts);
+router.get("/date", getCalWorkouts);
 
 export default router;
