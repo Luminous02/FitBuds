@@ -21,7 +21,7 @@ const Splash = () => {
     <div className="splashwrapper active">
       <div className="logoHeader">
         <h2>
-          FitBuds <FaLeaf></FaLeaf>
+          FitBuds <img src="/fitBudsLogo.svg" id="splashLogo"></img>
         </h2>
       </div>
 

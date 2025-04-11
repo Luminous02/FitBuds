@@ -15,6 +15,11 @@
   padding-top: 2%;
 }
 
+body.darkmode .feedScroll {
+  background-color: #000000;
+  border: 1px solid #3d3d3d;
+}
+
 .leaderScroll {
   grid-column: 2;
   grid-row: 3;
@@ -30,8 +35,8 @@
   color: white;
   background: #3d3d3d;
   padding-top: 3%;
-  border-top-left-radius: 10vh;
-  border-top-right-radius: 10vh;
+  border-top-left-radius: 5vh;
+  border-top-right-radius: 5vh;
   margin: 0 20px 0 20px;
   grid-row: 1;
 }
@@ -41,17 +46,21 @@
   background: #3d3d3d;
   padding-top: 3%;
   padding-bottom: 3%;
-  border-top-left-radius: 10vh;
-  border-top-right-radius: 10vh;
+  border-top-left-radius: 5vh;
+  border-top-right-radius: 5vh;
   margin: 0;
 }
 
-.leaderScroll ol {
+.leaderScroll .leaderboardGrid {
   list-style-type: none;
   width: 100%;
   height: 100vh;
   background-color: #8fab71;
-  overflow: hidden;
+  overflow: auto;
+}
+
+body.darkmode .leaderScroll .leaderboardGrid {
+  background-color: #000000;
 }
 
 .gradientBlockLeft {

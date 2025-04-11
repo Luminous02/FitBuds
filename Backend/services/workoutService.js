@@ -57,3 +57,23 @@ export const getWorkoutsFromDB = async (userID) => {
     throw error;
   }
 };
+<<<<<<< HEAD
+=======
+
+export const getWorkoutsByDateFromDB = async (userID, date) => {
+  try {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+      throw new Error("Invalid date format. Expected YYYY-MM-DD");
+    }
+
+    const [workouts] = await pool.query(
+      "SELECT * FROM workouts WHERE userID = ? AND DATE(date) = ? ORDER BY date DESC",
+      [userID, date]
+    );
+    return workouts;
+  } catch (error) {
+    console.error("Database error in getWorkoutsByDateFromDB:", error);
+    throw error;
+  }
+};
+>>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0

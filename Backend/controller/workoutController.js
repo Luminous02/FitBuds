@@ -1,6 +1,10 @@
 import {
   addWorkoutToDB,
   getWorkoutsFromDB,
+<<<<<<< HEAD
+=======
+  getWorkoutsByDateFromDB,
+>>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
 } from "../services/workoutService.js";
 
 export const addWorkout = async (req, res) => {
@@ -80,3 +84,41 @@ export const getWorkouts = async (req, res) => {
     });
   }
 };
+<<<<<<< HEAD
+=======
+
+export const getCalWorkouts = async (req, res) => {
+  try {
+    const { userID, date } = req.query;
+
+    if (!userID) {
+      return res.status(400).json({
+        success: false,
+        message: "User ID is required",
+      });
+    }
+
+    if (!date) {
+      return res.status(400).json({
+        success: false,
+        message: "Date is required",
+      });
+    }
+
+    // Use the service function
+    const workouts = await getWorkoutsByDateFromDB(userID, date);
+
+    return res.status(200).json({
+      success: true,
+      workouts,
+    });
+  } catch (error) {
+    console.error("Error fetching workouts:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch workouts",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
+  }
+};
+>>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0

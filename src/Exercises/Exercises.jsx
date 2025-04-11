@@ -25,6 +25,50 @@ const Exercises = () => {
         setActiveVideoIndex(index);
     };
 
+    useEffect(() => {
+        // Add the Chatbase script
+        const script = document.createElement("script");
+        script.src = "https://www.chatbase.co/embed.min.js";
+        script.id = "-7Uc-dwAafJ9v8JHsLXC7";
+        script.domain = "www.chatbase.co";
+        document.body.appendChild(script);
+
+        return () => {
+            // Clean up the script
+            const existingScript = document.getElementById("-7Uc-dwAafJ9v8JHsLXC7");
+            if (existingScript) {
+                document.body.removeChild(existingScript);
+            }
+
+            // Try to use Chatbase API if available (replace with actual API call)
+            if (window.chatbase && typeof window.chatbase === 'function' && window.chatbase('destroy')) {
+                window.chatbase('destroy');
+                console.log('Chatbase widget destroyed via API (if available)');
+                return; // If API call works, no need for manual DOM removal
+            }
+
+            // More specific targeting of Chatbase elements
+            const chatbaseLauncher = document.querySelector('#chatbase-launcher'); // Example ID
+            if (chatbaseLauncher && chatbaseLauncher.parentNode) {
+                chatbaseLauncher.parentNode.removeChild(chatbaseLauncher);
+            }
+
+            const chatbaseWidget = document.querySelector('.chatbase-widget'); // Example class
+            if (chatbaseWidget && chatbaseWidget.parentNode) {
+                chatbaseWidget.parentNode.removeChild(chatbaseWidget);
+            }
+
+            // Add more specific selectors based on your inspection of the DOM
+            const iframes = document.querySelectorAll("iframe[src*='chatbase']");
+            iframes.forEach((iframe) => iframe.remove());
+
+            const chatbaseContainers = document.querySelectorAll("div[id*='chatbase'], div[class*='chatbase']");
+            chatbaseContainers.forEach((el) => el.remove());
+
+            console.log('Chatbase elements removed on Exercises unmount');
+        };
+    }, []);
+
     return (
         <>
         <h3 className="heading">Video Gallery</h3>

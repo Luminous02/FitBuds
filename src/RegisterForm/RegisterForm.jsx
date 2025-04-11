@@ -113,6 +113,10 @@ const RegisterForm = () => {
         <button type="submit" id="loginSubmit">
           Register
         </button>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
         <a href="#" id="forgotPass">
           Forgot password?
         </a>
