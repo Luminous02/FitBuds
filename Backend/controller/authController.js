@@ -98,11 +98,7 @@ export const getUser = async (req, res) => {
 
 export const updateUserSettings = async (req, res) => {
   const userID = req.params.id;
-<<<<<<< HEAD
   const { unitTime, unitWeight, difficulty, notifications, privateProfile, password } = req.body;
-=======
-  const { unitTime, unitWeight, difficulty, notifications, privateProfile } = req.body;
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
 
   if (!userID) {
     return res.status(400).json({ success: false, message: "User ID is required" });
@@ -120,7 +116,6 @@ export const updateUserSettings = async (req, res) => {
       return res.status(404).json({ success: false, message: "User not found" });
     }
 
-<<<<<<< HEAD
     if (password) {
       const [passwordResult] = await pool.query(
         `UPDATE accounts
@@ -134,8 +129,6 @@ export const updateUserSettings = async (req, res) => {
       }
     }
 
-=======
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
     return res.status(200).json({ success: true, message: "Settings updated successfully" });
   } catch (error) {
     console.error("Error updating settings:", error);

@@ -64,16 +64,12 @@ const Settings = () => {
         notifications: settings.notifications,
         privateProfile: settings.privateProfile,
       };
-<<<<<<< HEAD
 
       if(settings.password) {
         updatedSettings.password = settings.password;
       }
       await axios.put(`http://localhost:3000/api/auth/user/${userID}/settings`, updatedSettings);
       setSettings((prevSettings) => ({ ...prevSettings, password: "" }));
-=======
-      await axios.put(`http://localhost:3000/api/auth/user/${userID}/settings`, settings);
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
       alert("Settings saved successfully!");
     } catch (error) {
       console.error("Failed to save settings:", error.response?.data || error.message);

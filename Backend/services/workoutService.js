@@ -57,8 +57,6 @@ export const getWorkoutsFromDB = async (userID) => {
     throw error;
   }
 };
-<<<<<<< HEAD
-=======
 
 export const getWorkoutsByDateFromDB = async (userID, date) => {
   try {
@@ -76,4 +74,3 @@ export const getWorkoutsByDateFromDB = async (userID, date) => {
     throw error;
   }
 };
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
