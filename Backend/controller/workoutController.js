@@ -1,10 +1,7 @@
 import {
   addWorkoutToDB,
   getWorkoutsFromDB,
-<<<<<<< HEAD
-=======
   getWorkoutsByDateFromDB,
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
 } from "../services/workoutService.js";
 
 export const addWorkout = async (req, res) => {
@@ -84,8 +81,6 @@ export const getWorkouts = async (req, res) => {
     });
   }
 };
-<<<<<<< HEAD
-=======
 
 export const getCalWorkouts = async (req, res) => {
   try {
@@ -121,4 +116,3 @@ export const getCalWorkouts = async (req, res) => {
     });
   }
 };
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
