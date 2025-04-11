@@ -185,6 +185,8 @@ header {
 }
 
 .sidebar .top .logo {
+  font-size: 1.2rem;
+  font-weight: bolder;
   color: white;
   display: flex;
   height: 50px;
@@ -206,7 +208,9 @@ header {
 .user {
   display: flex;
   align-items: center;
-  margin: 1rem 0;
+  padding: 15px;
+  margin: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .user p {
@@ -397,4 +401,48 @@ header {
   transition: all 0.5s ease;
   width: calc(100% - 80px);
   padding: 1rem 1rem 0 1rem;
+}
+
+.user-icon-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.user-icon {
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.user-info {
+  margin-left: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+/* Collapsed sidebar styles */
+.sidebar:not(.active) .user {
+  justify-content: center;
+  padding: 15px 5px;
+}
+
+.sidebar:not(.active) .user-info {
+  display: none; /* Hide text when collapsed */
+}
+
+.sidebar:not(.active) .user-icon-container {
+  width: 36px;
+  height: 36px;
+  margin: 0 auto;
+}
+
+#logoWhite {
+  width: 3rem;
+  margin-right: 5%;
 }

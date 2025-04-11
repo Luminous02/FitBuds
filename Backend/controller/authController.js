@@ -50,6 +50,7 @@ export const login = async (req, res) => {
 
     if (response.success) {
       return res.status(200).json({ success: true, user: response.user });
+      return res.status(200).json({ success: true, user: response.user });
     } else {
       return res.status(401).json(response);
     }
