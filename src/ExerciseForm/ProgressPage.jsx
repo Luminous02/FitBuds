@@ -1,24 +1,11 @@
-<<<<<<< HEAD
-import React from "react";
-import { useNavigate } from "react-router-dom";
-=======
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
 import ExerciseInput from "./ExerciseInput";
 import ExerciseOutput from "./ExerciseOutput";
 import "./Progress.css";
 import axios from "axios";
 
 const ProgressPage = () => {
-<<<<<<< HEAD
-    const navigate = useNavigate();
-
-  return (
-    <div className="progress-container">
-      <ExerciseInput></ExerciseInput>
-      <ExerciseOutput></ExerciseOutput>
-=======
   const navigate = useNavigate();
   const location = useLocation();
   const [workouts, setWorkouts] = useState([]);
@@ -68,7 +55,6 @@ const ProgressPage = () => {
       ) : (
         <ExerciseOutput workouts={workouts} />
       )}
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
     </div>
   );
 };
