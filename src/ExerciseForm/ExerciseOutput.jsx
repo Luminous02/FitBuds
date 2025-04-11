@@ -65,11 +65,7 @@ const ExerciseOutput = () => {
 
   return (
     <div className="exercise-input-wrapper">
-<<<<<<< HEAD
-      <h1>Workout Log</h1>
-=======
       <h1>Recent Workouts</h1>
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
       {workouts.length === 0 ? (
         <div className="no-workouts">
           <p>No workouts logged yet.</p>
@@ -81,11 +77,7 @@ const ExerciseOutput = () => {
               <div className="workout-header">
                 <h3>{workout.type}</h3>
                 <span className="workout-date">
-<<<<<<< HEAD
-                  {new Date(workout.workout_date).toLocaleDateString()}
-=======
                   {formatWorkoutDate(workout.date)}
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
                 </span>
               </div>
 
@@ -121,8 +113,6 @@ const ExerciseOutput = () => {
   );
 };
 
-<<<<<<< HEAD
-=======
 const formatWorkoutDate = (dateString) => {
   try {
     const options = { year: "numeric", month: "short", day: "numeric" };
@@ -133,7 +123,6 @@ const formatWorkoutDate = (dateString) => {
   }
 };
 
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
 // Helper function to format time from HH:MM:SS to minutes
 function formatTimeDisplay(timeString) {
   if (!timeString) return "N/A";

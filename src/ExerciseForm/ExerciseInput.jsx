@@ -3,10 +3,6 @@ import "./ExerciseApp.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-<<<<<<< HEAD
-const ExerciseInput = ({ currentUser }) => {
-  const navigate = useNavigate();
-=======
 const ExerciseInput = ({ onWorkoutAdded }) => {
   const navigate = useNavigate();
 
@@ -15,7 +11,6 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
     throw new Error("User not authenticated");
   }
 
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
   const [workout, setWorkout] = useState({
     date: new Date().toISOString().split("T")[0], // Default to today's date
     type: "",
@@ -56,7 +51,6 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
       setError("Please select a workout type");
       setIsSubmitting(false);
       return;
-<<<<<<< HEAD
     }
 
     // Additional validation for cardio workouts
@@ -68,19 +62,6 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
       }
     }
 
-=======
-    }
-
-    // Additional validation for cardio workouts
-    if (["Running", "Cycling", "Swimming"].includes(workout.type)) {
-      if (!workout.distance || !workout.time) {
-        setError("Distance and time are required for this workout type");
-        setIsSubmitting(false);
-        return;
-      }
-    }
-
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
     // Additional validation for strength workouts
     if (["Weight Training", "HIIT"].includes(workout.type)) {
       if (!workout.reps) {
@@ -94,20 +75,12 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
       const response = await axios.post(
         "http://localhost:3000/api/workouts",
         {
-<<<<<<< HEAD
-          userID: currentUser?.id || null,
-=======
           userID: userID,
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
           date: workout.date,
           type: workout.type,
           distance: workout.distance || null,
           time: workout.time || null,
-<<<<<<< HEAD
-          pace: workout.pace || null,
-=======
           pace: workout.pace * 100 || null,
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
           reps: workout.reps || null,
         },
         {
@@ -127,26 +100,14 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
           pace: "",
           reps: "",
         });
-<<<<<<< HEAD
-        navigate("/dashboard/progress");
-=======
         if (onWorkoutAdded) {
           onWorkoutAdded();
         }
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
       } else {
         setError(response.data.message || "Failed to save workout");
       }
     } catch (error) {
-<<<<<<< HEAD
-      console.error("Error saving workout:", error);
-      setError(
-        error.response?.data?.message ||
-          "An error occurred while saving your workout. Please try again."
-      );
-=======
       setError(error.response?.data?.message || "Error saving workout");
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
     } finally {
       setIsSubmitting(false);
     }
@@ -221,7 +182,6 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
                 required
               />
             </div>
-<<<<<<< HEAD
 
             <div className="form-group">
               <label htmlFor="pace">
@@ -239,25 +199,6 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
           </>
         )}
 
-=======
-
-            <div className="form-group">
-              <label htmlFor="pace">
-                Pace (min/{workout.type === "Swimming" ? "100yd" : "mile"})
-              </label>
-              <input
-                type="text"
-                id="pace"
-                name="pace"
-                value={workout.pace || ""}
-                readOnly
-                className="read-only"
-              />
-            </div>
-          </>
-        )}
-
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
         {["Weight Training", "HIIT"].includes(workout.type) && (
           <div className="form-group">
             <label htmlFor="reps">Total Reps</label>

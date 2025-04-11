@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
-=======
 import { FaUser } from "react-icons/fa";
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
 import {
   BrowserRouter as Router,
   Routes,
@@ -58,44 +55,6 @@ const Dashboard = () => {
   const toggleSidebar = () => {
     setSidebarActive(!sidebarActive);
   };
-<<<<<<< HEAD
-
-  return (
-    <div className="dashboard-container">
-      <header>
-        <div className="searchbar">
-          <input type="text" placeholder="Search" />
-          <div className="searchbtn">
-            <i className="bx bx-search-alt-2"></i>
-          </div>
-        </div>
-        <div className="help">
-          <div className="circle">
-            <i className="bx bx-help-circle"></i>
-          </div>
-        </div>
-      </header>
-
-      <div className={`sidebar ${sidebarActive ? "active" : ""}`}>
-        <div className="top">
-          <div className="logo">
-            <i className="bx bxl-foursquare"></i>
-            <span>FitBuds</span>
-          </div>
-          <i className="bx bx-menu" id="btn" onClick={toggleSidebar}></i>
-        </div>
-        <div className="user">
-          <img
-            src="user-circle-regular-24.png"
-            alt="User"
-            className="user-img"
-          />
-          <div>
-            <p className="bold">{user}</p>
-            <p>Parent</p>
-          </div>
-        </div>
-=======
   return (
     <div className="dashboard-container">
       <header>
@@ -131,7 +90,6 @@ const Dashboard = () => {
             <p>Parent</p>
           </div>
         </div>
->>>>>>> 1408a5a43c21ff3d6a87bfddd07948f022a379d0
         <ul>
           <li>
             <Link to="home">
