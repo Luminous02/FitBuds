@@ -98,7 +98,7 @@ export const getUser = async (req, res) => {
 
 export const updateUserSettings = async (req, res) => {
   const userID = req.params.id;
-  const { unitTime, unitWeight, difficulty, notifications, privateProfile } = req.body;
+  const { unitTime, unitWeight, difficulty, notifications, privateProfile, password } = req.body;
 
   if (!userID) {
     return res.status(400).json({ success: false, message: "User ID is required" });
@@ -114,6 +114,19 @@ export const updateUserSettings = async (req, res) => {
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    if (password) {
+      const [passwordResult] = await pool.query(
+        `UPDATE accounts
+        SET password = ?
+        WHERE userID = ?`,
+        [password, userID]
+      );
+
+      if (passwordResult.affectedRows === 0) {
+        return res.status(404).json({ success: false, message: "User not found in accounts" });
+      }
     }
 
     return res.status(200).json({ success: true, message: "Settings updated successfully" });
