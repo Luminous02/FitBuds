@@ -2,6 +2,16 @@ import userModel from "../models/userModel.js";
 import { registerUser, loginUser } from "../services/authServices.js";
 import { pool } from "../config/db.js"
 
+const generateGroupCode = () => {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const nums = "0123456789";
+  let code = "";
+  for(let i = 0; i < 3; i++) code += chars[Math.floor(Math.random() * chars.length)];
+  for(let i = 0; i < 3; i++) code += nums[Math.floor(Math.random() * nums.length)];
+  return code; //e.g. "ABC123"
+
+}
+
 export const register = async (req, res) => {
   const { email, username, password, fname, bday } = req.body;
   if (!email || !fname || !bday || !username || !password) {
@@ -15,11 +25,27 @@ export const register = async (req, res) => {
   try {
     const response = await registerUser(user);
     if (response.success) {
-      return res.status(200).json(response);
+      const userID = response.user.id;
+      const groupCode = generateGroupCode();
+
+      //set groupID to userID and assign groupCode
+      await pool.query(
+        `UPDATE userData
+        set groupID = ?, groupCode = ?
+        WHERE userID = ?`,
+        [userID, groupCode, userID]
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "User registered successfully",
+        user: { ...response.user, groupCode },
+      });
     } else {
       return res.status(400).json(response);
     }
   } catch (error) {
+    console.error("Registration error:", error.message, error.stack);
     return {
       success: false,
       message: "Registration failed, please try again later",
@@ -73,7 +99,7 @@ export const getUser = async (req, res) => {
   try {
     console.log("Fetching user with ID:", userID); 
     const [userRows] = await pool.query(
-      `SELECT u.email, u.fname AS name, u.bday, a.username, u.unitTime, u.unitWeight, u.difficulty, u.notifications, u.privateProfile 
+      `SELECT u.email, u.fname AS name, u.bday, a.username, u.unitTime, u.unitWeight, u.difficulty, u.notifications, u.privateProfile, u.groupCode 
       FROM userData u 
       JOIN accounts a ON u.userID = a.userID
       WHERE a.userID = ?`,
@@ -98,7 +124,7 @@ export const getUser = async (req, res) => {
 
 export const updateUserSettings = async (req, res) => {
   const userID = req.params.id;
-  const { unitTime, unitWeight, difficulty, notifications, privateProfile, password } = req.body;
+  const { unitTime, unitWeight, difficulty, notifications, privateProfile, password, groupCode } = req.body;
 
   if (!userID) {
     return res.status(400).json({ success: false, message: "User ID is required" });
@@ -129,6 +155,25 @@ export const updateUserSettings = async (req, res) => {
       }
     }
 
+//join a group if groupCode is provided
+  if (groupCode) {
+    const [groupRows] = await pool.query(
+      `SELECT userID FROM userData WHERE groupCode = ? AND groupID = userID`,
+      [groupCode]
+    );
+
+    if (groupRows.length === 0) {        ``
+      return res.status(400).json({ success: false, message: "Invalid group code"});
+    }
+
+    const parentID = groupRows[0].userID;
+    await pool.query(
+      `UPDATE userData
+      SET groupID = ?
+      WHERE userID = ?`,
+      [parentID, userID]
+    );
+  }
     return res.status(200).json({ success: true, message: "Settings updated successfully" });
   } catch (error) {
     console.error("Error updating settings:", error);

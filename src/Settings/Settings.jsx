@@ -13,6 +13,7 @@ const Settings = () => {
     difficulty: "medium",
     notifications: true,
     privateProfile: false,
+    groupCode: "",
   });
 
   const userID = localStorage.getItem("userID");
@@ -22,7 +23,7 @@ const Settings = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/auth/user/${userID}`);
-        const { name, email, unitTime, unitWeight, difficulty, notifications, privateProfile } = response.data.user;
+        const { name, email, unitTime, unitWeight, difficulty, notifications, privateProfile, groupCode } = response.data.user;
 
         setSettings((prevSettings) => ({
           ...prevSettings,
@@ -33,9 +34,10 @@ const Settings = () => {
           difficulty: difficulty || "medium",
           notifications: notifications !== undefined ? notifications : true,
           privateProfile: privateProfile !== undefined ? privateProfile : false,
+          groupCode: groupCode || "",
         }));
       } catch (error) {
-        console.error("Failed to fetch user data:", error);
+        console.error("Failed to fetch user data:", error.response?.data || error.message);
       }
     };
 
@@ -68,8 +70,12 @@ const Settings = () => {
       if(settings.password) {
         updatedSettings.password = settings.password;
       }
+      if (settings.groupCode) {
+        updatedSettings.groupCode = settings.groupCode;
+      }
+
       await axios.put(`http://localhost:3000/api/auth/user/${userID}/settings`, updatedSettings);
-      setSettings((prevSettings) => ({ ...prevSettings, password: "" }));
+      setSettings((prevSettings) => ({ ...prevSettings, password: "", groupCode: "" }));
       alert("Settings saved successfully!");
     } catch (error) {
       console.error("Failed to save settings:", error.response?.data || error.message);
