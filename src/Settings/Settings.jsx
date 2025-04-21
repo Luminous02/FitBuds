@@ -135,6 +135,32 @@ const Settings = () => {
     }
   };
 
+  const handleLeaveGroup = async () => {
+    if (!window.confirm("Are you sure you want to leave the family group?")) {
+      return;
+    }
+
+    try {
+      const response = await axios.post(`http://localhost:3000/api/auth/user/${userID}/leave-group`);
+      if (response.data.success) {
+        // Refresh user data to update UI
+        const userResponse = await axios.get(`http://localhost:3000/api/auth/user/${userID}`);
+        const { groupID, groupLeaderName } = userResponse.data.user;
+        setIsGroupLeader(groupID === parseInt(userID));
+        setSettings((prevSettings) => ({
+          ...prevSettings,
+          groupLeaderName: groupLeaderName || "",
+        }));
+        alert("Successfully left the group!");
+      } else {
+        setError(response.data.message || "Failed to leave group");
+      }
+    } catch (error) {
+      console.error("Error leaving group:", error.response?.data || error.message);
+      setError(error.response?.data?.message || "Failed to leave group. Please try again.");
+    }
+  };
+
 
   return (
     <div className="settings-container">
@@ -179,6 +205,13 @@ const Settings = () => {
           {!isGroupLeader && settings.groupLeaderName && (
             <div className="group-leader-display">
               <p>You are in <strong>{settings.groupLeaderName}</strong>'s family group.</p>
+              <button
+                type="button"
+                className="leave-group-btn"
+                onClick={handleLeaveGroup}
+              >
+                Leave Family
+              </button>
             </div>
           )}
            <label>

@@ -1,5 +1,5 @@
 import express from "express";
-import { register, login, getUser, updateUserSettings, deleteUser, assignGroupCodes } from "../controller/authController.js";
+import { register, login, getUser, updateUserSettings, deleteUser, assignGroupCodes, leaveGroup } from "../controller/authController.js";
 
 const router = express.Router();
 
@@ -9,5 +9,6 @@ router.post("/register-user", register);
 router.post("/login-user", login);
 router.delete("/user/:id", deleteUser);
 router.post("/assign-group-codes", assignGroupCodes);
+router.post("/user/:id/leave-group", leaveGroup);
 
 export default router;

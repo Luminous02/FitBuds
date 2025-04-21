@@ -283,3 +283,47 @@ export const assignGroupCodes = async (req, res) => {
     });
   }
 };
+
+export const leaveGroup = async (req, res) => {
+  const userID = req.params.id;
+  console.log("User attempting to leave group:", userID);
+
+  if (!userID) {
+    return res.status(400).json({ success: false, message: "User ID is required" });
+  }
+
+  try {
+    // Check if user exists and get their groupID
+    const [userRows] = await pool.query(
+      `SELECT groupID FROM userData WHERE userID = ?`,
+      [userID]
+    );
+
+    if (userRows.length === 0) {
+      console.log("No user found for ID:", userID);
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    const { groupID } = userRows[0];
+
+    // If user is already a group leader, no need to leave
+    if (groupID === parseInt(userID)) {
+      console.log("User is already a group leader:", userID);
+      return res.status(400).json({ success: false, message: "You are already the group leader" });
+    }
+
+    // Reset groupID to userID
+    await pool.query(
+      `UPDATE userData 
+       SET groupID = ?
+       WHERE userID = ?`,
+      [userID, userID]
+    );
+
+    console.log(`User ${userID} left group, groupID reset to ${userID}`);
+    return res.status(200).json({ success: true, message: "Successfully left the group" });
+  } catch (error) {
+    console.error("Error leaving group:", error.message, error.stack);
+    return res.status(500).json({ success: false, message: "Failed to leave group" });
+  }
+};
