@@ -58,10 +58,6 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <header>
-        <div className="logo">
-          <img src="/fitBudsLogoWhite.svg" id="logoWhite"></img>
-          <span>FitBuds</span>
-        </div>
         <div className="searchbar">
           <input type="text" placeholder="Search" />
           <div className="searchbtn">
@@ -77,6 +73,10 @@ const Dashboard = () => {
 
       <div className={`sidebar ${sidebarActive ? "active" : ""}`}>
         <div className="top">
+          <div className="logo">
+            <img src="/fitBudsLogoWhite.svg" id="logoWhite"></img>
+            <span>FitBuds</span>
+          </div>
           <i className="bx bx-menu" id="btn" onClick={toggleSidebar}></i>
         </div>
         <div className="user">

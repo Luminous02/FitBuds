@@ -10,7 +10,9 @@ export const addWorkoutToDB = async (workout) => {
 
     let points = 0;
     if (["Running", "Cycling", "Swimming"].includes(workout.type)) {
-      points = workout.distance ? Math.round(parseFloat(workout.distance) * 100) : 0;
+      points = workout.distance
+        ? Math.round(parseFloat(workout.distance) * 100)
+        : 0;
     } else if (["Weight Training", "HIIT"].includes(workout.type)) {
       points = workout.reps ? parseInt(workout.reps) * 10 : 0;
     }
@@ -84,7 +86,6 @@ export const getWorkoutsByDateFromDB = async (userID, date) => {
   }
 };
 
-
 export const getWorkoutsByMonthFromDB = async (userID, year, month) => {
   try {
     const startDate = `${year}-${month.toString().padStart(2, "0")}-01`;
@@ -101,7 +102,6 @@ export const getWorkoutsByMonthFromDB = async (userID, year, month) => {
   }
 };
 
-
 export const getGroupPointsFromDB = async (groupID, period) => {
   try {
     let dateCondition = "";
@@ -110,9 +110,11 @@ export const getGroupPointsFromDB = async (groupID, period) => {
     if (period === "today") {
       dateCondition = "AND DATE(w.date) = CURDATE()";
     } else if (period === "week") {
-      dateCondition = "AND w.date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND w.date <= CURDATE()";
+      dateCondition =
+        "AND w.date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND w.date <= CURDATE()";
     } else if (period === "month") {
-      dateCondition = "AND w.date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND w.date <= CURDATE()";
+      dateCondition =
+        "AND w.date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY) AND w.date <= CURDATE()";
     }
 
     const query = `

@@ -6,7 +6,7 @@
 .lboard_section {
   width: 100%;
   height: 400px;
-  margin:  0;
+  margin: 0;
   background: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -49,7 +49,7 @@ body.darkmode .lboard_section ul li {
   color: #8fab71;
 }
 
-body.darkmode .lboard_section ul li:hover, 
+body.darkmode .lboard_section ul li:hover,
 body.darkmode .lboard_section ul li.active {
   color: #d0ff9d;
 }

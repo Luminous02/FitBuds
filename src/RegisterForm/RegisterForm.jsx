@@ -107,6 +107,13 @@ const RegisterForm = () => {
           />
         </div>
 
+        <div className="remember-forgot">
+          <label>
+            <input type="checkbox" />
+            Remember me
+          </label>
+        </div>
+
         <button type="submit" id="loginSubmit">
           Register
         </button>

@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Calendar.css";
-import { GiWeightLiftingUp, GiCycle } from "react-icons/gi";
-import { FaRunning, FaSwimmer, FaBicycle } from "react-icons/fa";
 
 const Calendar = () => {
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
+  const [eventsArr, setEventsArr] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [workouts, setWorkouts] = useState([]);
-  const [monthWorkouts, setMonthWorkouts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const months = [
@@ -30,66 +28,11 @@ const Calendar = () => {
 
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  // Workout type to icon mapping
-  const workoutIcons = {
-    "Weight lifting": <GiWeightLiftingUp className="workout-icon" />,
-    Running: <FaRunning className="workout-icon" />,
-    Swimming: <FaSwimmer className="workout-icon" />,
-    Cycling: <FaBicycle className="workout-icon" />,
-    HIIT: <GiCycle className="workout-icon" />,
-  };
-
-  useEffect(() => {
-    fetchMonthWorkouts();
-  }, [month, year]);
-
-  useEffect(() => {
-    fetchWorkoutsForDate(selectedDate);
-  }, [selectedDate]);
-
-  const fetchMonthWorkouts = async () => {
-    try {
-      const userID = localStorage.getItem("userID");
-      if (!userID) return;
-
-      const response = await axios.get(
-        `http://localhost:3000/api/workouts/month?userID=${userID}&year=${year}&month=${
-          month + 1
-        }`
-      );
-
-      if (response.data.success) {
-        setMonthWorkouts(response.data.workouts);
-      }
-    } catch (error) {
-      console.error("Error fetching month workouts:", error);
-    }
-  };
-
-  const fetchWorkoutsForDate = async (date) => {
-    try {
-      setLoading(true);
-      const userID = localStorage.getItem("userID");
-      if (!userID) return;
-
-      const dateStr = date.toISOString().split("T")[0];
-      const response = await axios.get(
-        `http://localhost:3000/api/workouts/date?userID=${userID}&date=${dateStr}`
-      );
-
-      if (response.data.success) {
-        setWorkouts(response.data.workouts);
-      }
-    } catch (error) {
-      console.error("Error fetching workouts:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     const daysContainer = document.querySelector(".days");
-    if (!daysContainer) return;
+    if (!daysContainer) {
+      return;
+    }
 
     function initCalendar() {
       const firstDay = new Date(year, month, 1);
@@ -115,8 +58,6 @@ const Calendar = () => {
       // Current month's days
       for (let i = 1; i <= lastDate; i++) {
         const date = new Date(year, month, i);
-        const dateStr = date.toISOString().split("T")[0];
-
         const isToday =
           i === new Date().getDate() &&
           month === new Date().getMonth() &&
@@ -127,15 +68,11 @@ const Calendar = () => {
           selectedDate.getMonth() === month &&
           selectedDate.getFullYear() === year;
 
-        // Check if any workout exists for this date
-        const hasWorkout = monthWorkouts.some((workout) => {
-          const workoutDate = new Date(workout.date)
-            .toISOString()
-            .split("T")[0];
-          return workoutDate === dateStr;
-        });
-
-        days += `<div class="day ${hasWorkout ? "has-workout" : ""} ${
+        let event = eventsArr.some(
+          (event) =>
+            event.day === i && event.month === month + 1 && event.year === year
+        );
+        days += `<div class="day ${event ? "event" : ""} ${
           isToday ? "today" : ""
         } ${isSelected ? "selected" : ""}" data-day="${i}">${i}</div>`;
       }
@@ -155,6 +92,7 @@ const Calendar = () => {
             const day = parseInt(dayElement.dataset.day);
             if (!isNaN(day)) {
               handleDayClick(day);
+
               // Update selected class on all days
               daysContainer.querySelectorAll(".day").forEach((dayEl) => {
                 dayEl.classList.remove("selected");
@@ -164,7 +102,7 @@ const Calendar = () => {
           });
         });
 
-      // Scroll to today if in current view
+      // Ensure today is visible if it's in current view
       const today = new Date();
       if (month === today.getMonth() && year === today.getFullYear()) {
         const todayElement = daysContainer.querySelector(".day.today");
@@ -173,11 +111,42 @@ const Calendar = () => {
     }
 
     initCalendar();
-  }, [month, year, monthWorkouts, selectedDate]);
+  }, [month, year, eventsArr]);
+
+  useEffect(() => {
+    fetchWorkoutsForDate(selectedDate);
+  }, [selectedDate]);
+
+  const fetchWorkoutsForDate = async (date) => {
+    try {
+      setLoading(true);
+      const userID = localStorage.getItem("userID");
+      if (!userID) return;
+
+      const dateStr = date.toISOString().split("T")[0]; // Format as YYYY-MM-DD
+      const response = await axios.get(
+        `http://localhost:3000/api/workouts/date?userID=${userID}&date=${dateStr}`
+      );
+
+      console.log("API Response:", response.data);
+
+      if (response.data.success) {
+        setWorkouts(response.data.workouts);
+      }
+    } catch (error) {
+      console.error("Error fetching workouts:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleDayClick = (day) => {
     const newSelectedDate = new Date(year, month, day);
     setSelectedDate(newSelectedDate);
+  };
+
+  const getDayOfWeek = (date) => {
+    return daysOfWeek[date.getDay()];
   };
 
   return (
@@ -196,10 +165,15 @@ const Calendar = () => {
             ></i>
           </div>
           <div className="weekdays">
-            {daysOfWeek.map((day) => (
-              <div key={day}>{day}</div>
-            ))}
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
           </div>
+
           <div className="days"></div>
           <div className="goto-today">
             <div className="goto">
@@ -236,12 +210,7 @@ const Calendar = () => {
           ) : (
             workouts.map((workout) => (
               <div key={workout.workoutID} className="workout-item">
-                <div className="workout-header">
-                  {workoutIcons[workout.type] || (
-                    <GiWeightLiftingUp className="workout-icon" />
-                  )}
-                  <h4>{workout.type}</h4>
-                </div>
+                <h4>{workout.type}</h4>
                 {workout.distance && <p>Distance: {workout.distance} miles</p>}
                 {workout.time && <p>Duration: {workout.time}</p>}
                 {workout.pace && <p>Pace: {workout.pace} min/mile</p>}
