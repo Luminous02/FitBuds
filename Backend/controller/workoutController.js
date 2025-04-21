@@ -2,12 +2,13 @@ import {
   addWorkoutToDB,
   getWorkoutsFromDB,
   getWorkoutsByDateFromDB,
+  getGroupPointsFromDB
 } from "../services/workoutService.js";
 
 export const addWorkout = async (req, res) => {
   const { userID, type, distance, time, pace, reps, date } = req.body;
 
-  if (!type) {
+  if (!userID || !type) {
     return res.status(400).json({
       success: false,
       message: "User ID and workout type are required",
@@ -113,6 +114,28 @@ export const getCalWorkouts = async (req, res) => {
       success: false,
       message: "Failed to fetch workouts",
       error: process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
+  }
+};
+
+export const getGroupPoints = async (req, res) => {
+  const { groupID } = req.query;
+
+  if (!groupID) {
+    return res.status(400).json({ success: false, message: "Group ID is required" });
+  }
+
+  try {
+    const groupPoints = await getGroupPointsFromDB(groupID);
+    return res.status(200).json({
+      success: true,
+      groupPoints,
+    });
+  } catch (error) {
+    console.error("Error fetching group points:", error.message, error.stack);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch group points: " + (error.message || "Unknown error"),
     });
   }
 };

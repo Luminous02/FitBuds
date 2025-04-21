@@ -8,6 +8,14 @@ export const addWorkoutToDB = async (workout) => {
       : null;
     const workoutTime = workout.time ? formatTimeForMySQL(workout.time) : null;
 
+    // Calculate points
+    let points = 0;
+    if (["Running", "Cycling", "Swimming"].includes(workout.type)) {
+      points = workout.distance ? Math.round(parseFloat(workout.distance) * 100) : 0;
+    } else if (["Weight Training", "HIIT"].includes(workout.type)) {
+      points = workout.reps ? parseInt(workout.reps) * 10 : 0;
+    }
+
     const query = `
       INSERT INTO workouts 
       (userID, date, type, distance, time, pace, reps) 
@@ -21,6 +29,7 @@ export const addWorkoutToDB = async (workout) => {
       workoutTime || null,
       workout.pace || null,
       workout.reps || null,
+      points,
     ];
 
     const [result] = await pool.query(query, values);
@@ -71,6 +80,26 @@ export const getWorkoutsByDateFromDB = async (userID, date) => {
     return workouts;
   } catch (error) {
     console.error("Database error in getWorkoutsByDateFromDB:", error);
+    throw error;
+  }
+};
+
+export const getGroupPointsFromDB = async (groupID) => {
+  try {
+    const [results] = await pool.query(
+      `
+      SELECT u.userID, u.fname AS name, SUM(w.points) AS totalPoints
+      FROM userData u
+      LEFT JOIN workouts w ON u.userID = w.userID
+      WHERE u.groupID = ?
+      GROUP BY u.userID, u.fname
+      ORDER BY totalPoints DESC
+      `,
+      [groupID]
+    );
+    return results;
+  } catch (error) {
+    console.error("Database error in getGroupPointsFromDB:", error);
     throw error;
   }
 };

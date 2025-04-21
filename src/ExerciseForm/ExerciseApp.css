@@ -243,3 +243,9 @@ button[type="submit"]:hover {
   border-radius: 4px;
   margin-bottom: 1rem;
 }
+
+.success-message {
+  color: #388e3c;
+  margin-bottom: 15px;
+  font-size: 0.9em;
+}
