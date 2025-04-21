@@ -3,6 +3,7 @@ import {
   addWorkout,
   getWorkouts,
   getCalWorkouts,
+  getMonthWorkouts,
 } from "../controller/workoutController.js";
 
 const router = express.Router();
@@ -11,5 +12,6 @@ const router = express.Router();
 router.post("/", addWorkout);
 router.get("/", getWorkouts);
 router.get("/date", getCalWorkouts);
+router.get("/month", getMonthWorkouts);
 
 export default router;
