@@ -2,6 +2,7 @@ import {
   addWorkoutToDB,
   getWorkoutsFromDB,
   getWorkoutsByDateFromDB,
+  getWorkoutsByMonthFromDB,
 } from "../services/workoutService.js";
 
 export const addWorkout = async (req, res) => {
@@ -112,6 +113,32 @@ export const getCalWorkouts = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Failed to fetch workouts",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
+  }
+};
+
+export const getMonthWorkouts = async (req, res) => {
+  try {
+    const { userID, year, month } = req.query;
+
+    if (!userID || !year || !month) {
+      return res.status(400).json({
+        success: false,
+        message: "User ID, year and month are required",
+      });
+    }
+
+    const workouts = await getWorkoutsByMonthFromDB(userID, year, month);
+    return res.status(200).json({
+      success: true,
+      workouts,
+    });
+  } catch (error) {
+    console.error("Error fetching monthly workouts:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch monthly workouts",
       error: process.env.NODE_ENV === "development" ? error.message : undefined,
     });
   }

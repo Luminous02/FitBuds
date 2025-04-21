@@ -74,3 +74,19 @@ export const getWorkoutsByDateFromDB = async (userID, date) => {
     throw error;
   }
 };
+
+export const getWorkoutsByMonthFromDB = async (userID, year, month) => {
+  try {
+    const startDate = `${year}-${month.toString().padStart(2, "0")}-01`;
+    const endDate = new Date(year, month, 0).toISOString().split("T")[0];
+
+    const [workouts] = await pool.query(
+      "SELECT * FROM workouts WHERE userID = ? AND date BETWEEN ? AND ? ORDER BY date DESC",
+      [userID, startDate, endDate]
+    );
+    return workouts;
+  } catch (error) {
+    console.error("Database error in getWorkoutsByMonthFromDB:", error);
+    throw error;
+  }
+};
