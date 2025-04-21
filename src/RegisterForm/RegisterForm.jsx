@@ -12,6 +12,7 @@ const RegisterForm = () => {
     fname: "",
     bday: "",
   });
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
     console.log(formValues);
 
     try {
@@ -48,6 +50,8 @@ const RegisterForm = () => {
     <div className="registerWrapper active">
       <form onSubmit={handleSubmit}>
         <h1>Register</h1>
+
+        {error && <div className="error-message">{error}</div>}
 
         <div className="input-box">
           <input

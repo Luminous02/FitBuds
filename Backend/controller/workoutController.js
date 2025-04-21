@@ -2,6 +2,8 @@ import {
   addWorkoutToDB,
   getWorkoutsFromDB,
   getWorkoutsByDateFromDB,
+  getGroupPointsFromDB,
+  getRecentGroupWorkoutsFromDB,
 } from "../services/workoutService.js";
 
 export const addWorkout = async (req, res) => {
@@ -142,3 +144,52 @@ export const getMonthWorkouts = async (req, res) => {
     });
   }
 };
+
+export const getGroupPoints = async (req, res) => {
+  const { groupID, period } = req.query;
+
+  if (!groupID) {
+    return res.status(400).json({ success: false, message: "Group ID is required" });
+  }
+
+  if (!["today", "week", "month"].includes(period)) {
+    return res.status(400).json({ success: false, message: "Invalid period. Use 'today', 'week', or 'month'" });
+  }
+
+  try {
+    const groupPoints = await getGroupPointsFromDB(groupID, period);
+    return res.status(200).json({
+      success: true,
+      groupPoints,
+    });
+  } catch (error) {
+    console.error("Error fetching group points:", error.message, error.stack);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch group points: " + (error.message || "Unknown error"),
+    });
+  }
+};
+
+export const getRecentGroupWorkouts = async (req, res) => {
+  const { groupID, limit } = req.query;
+
+  if (!groupID) {
+    return res.status(400).json({ success: false, message: "Group ID is required" });
+  }
+
+  try {
+    const workouts = await getRecentGroupWorkoutsFromDB(groupID, parseInt(limit) || 5);
+    return res.status(200).json({
+      success: true,
+      workouts,
+    });
+  } catch (error) {
+    console.error("Error fetching recent group workouts:", error.message, error.stack);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch recent group workouts: " + (error.message || "Unknown error"),
+    });
+  }
+};
+
