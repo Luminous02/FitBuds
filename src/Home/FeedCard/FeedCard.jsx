@@ -1,17 +1,18 @@
 import { FiThumbsUp, FiMoreHorizontal, FiShare } from "react-icons/fi";
 import "./FeedCard.css";
 
-const FeedCard = () => {
+const FeedCard = ({ name, username, type, time, points }) => {
   return (
     <div className="feedCard">
       <div className="cardUserData">
-        <h3>Full Name</h3>
-        <h5>@username</h5>
+      <h3>{name || "Full Name"}</h3>
+        <h5>{username ? `@${username}` : "@username"}</h5>
       </div>
 
       <div className="exerciseData">
-        <h4>34:05</h4>
-        <p>Minute Run</p>
+        <h4>{time || "N/A"}</h4>
+        <p>{type || "Workout"}</p>
+        <p>{points !== null ? `${points} points` : "0 points"}</p>
       </div>
 
       <button id="likeButton">

@@ -4,6 +4,8 @@ import {
   getWorkouts,
   getCalWorkouts,
   getMonthWorkouts,
+  getGroupPoints,
+  getRecentGroupWorkouts,
 } from "../controller/workoutController.js";
 
 const router = express.Router();
@@ -13,5 +15,7 @@ router.post("/", addWorkout);
 router.get("/", getWorkouts);
 router.get("/date", getCalWorkouts);
 router.get("/month", getMonthWorkouts);
+router.get("/group-points", getGroupPoints);
+router.get("/recent-group", getRecentGroupWorkouts);
 
 export default router;

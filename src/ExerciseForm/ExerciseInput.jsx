@@ -21,6 +21,7 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
   });
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [pointsEarned, setPointsEarned] = useState(null);
 
   // Calculate pace whenever time or distance changes
   useEffect(() => {
@@ -44,6 +45,7 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setPointsEarned(null);
     setIsSubmitting(true);
 
     // Basic validation
@@ -100,6 +102,7 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
           pace: "",
           reps: "",
         });
+        setPointsEarned(response.data.workout.points);
         if (onWorkoutAdded) {
           onWorkoutAdded();
         }
@@ -118,6 +121,11 @@ const ExerciseInput = ({ onWorkoutAdded }) => {
       <h1>Log Your Workout</h1>
 
       {error && <div className="error-message">{error}</div>}
+      {pointsEarned !== null && (
+        <div className="success-message">
+          Workout saved! You earned {pointsEarned} points.
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div className="form-group">

@@ -110,3 +110,12 @@
   .leave-group-btn:hover {
     background-color: #a5c524;
   }
+
+  .profile-picture-preview {
+    margin-top: 10px;
+  }
+  
+  .profile-picture-preview img {
+    border-radius: 50%;
+    object-fit: cover;
+  }

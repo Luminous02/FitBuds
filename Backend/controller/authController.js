@@ -95,7 +95,7 @@ export const getUser = async (req, res) => {
     console.log("Fetching user with ID:", userID); 
     const [userRows] = await pool.query(
       `SELECT u.email, u.fname AS name, u.bday, a.username, u.unitTime, u.unitWeight, u.difficulty, u.notifications, u.privateProfile, u.groupCode, u.groupID,
-          l.fname AS groupLeaderName
+          l.fname AS groupLeaderName, u.profilePicture
       FROM userData u 
       JOIN accounts a ON u.userID = a.userID
       LEFT JOIN userData l ON u.groupID = l.userID
@@ -136,18 +136,28 @@ export const getUser = async (req, res) => {
 
 export const updateUserSettings = async (req, res) => {
   const userID = req.params.id;
-  const { unitTime, unitWeight, difficulty, notifications, privateProfile, password, groupCode } = req.body;
+  const { unitTime, unitWeight, difficulty, notifications, privateProfile, password, groupCode, profilePicture } = req.body;
 
   if (!userID) {
     return res.status(400).json({ success: false, message: "User ID is required" });
   }
 
+  // Validate profilePicture
+  const validPictures = [
+    "/profile/blank.png", "/profile/boy1.png", "/profile/boy2.png", "/profile/boy3.png", "/profile/boy4.png",
+    "/profile/girl1.png", "/profile/girl2.png", "/profile/girl3.png"
+  ];
+  if (profilePicture && !validPictures.includes(profilePicture)) {
+    return res.status(400).json({ success: false, message: "Invalid profile picture" });
+  }
+
+
   try {
     const [result] = await pool.query(
       `UPDATE userData 
-       SET unitTime = ?, unitWeight = ?, difficulty = ?, notifications = ?, privateProfile = ?
+       SET unitTime = ?, unitWeight = ?, difficulty = ?, notifications = ?, privateProfile = ?, profilePicture = ?
        WHERE userID = ?`,
-      [unitTime, unitWeight, difficulty, notifications, privateProfile, userID]
+      [unitTime, unitWeight, difficulty, notifications, privateProfile, profilePicture || '/profile/blank.png', userID]
     );
 
     if (result.affectedRows === 0) {
