@@ -24,7 +24,7 @@ const LeaderboardCard = ({ groupPoints }) => {
     name: item.name,
     points: item.totalPoints || 0,
     percentage: calculatePercentage(item.totalPoints, maxPoints),
-    image: `/profile/user${(index % 7) + 1}.png`, // Cycle through placeholder images
+    image: item.profilePicture || "/profile/blank.png", // Use profilePicture from backend
   }));
 
   return (

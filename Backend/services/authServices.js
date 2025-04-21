@@ -9,8 +9,8 @@ export const registerUser = async (user, groupCode) => {
     const [acctResult] = await pool.query(acctQuery, acctValues);
     const userID = acctResult.insertId; // Get the auto-incremented userID
 
-    const uDataQuery = `INSERT INTO userData (userID, email, fname, bday, groupID, groupCode) VALUES (?,?,?,?,?,?)`;
-    const uDataValues = [userID, user.email, user.fname, user.bday, userID, groupCode];
+    const uDataQuery = `INSERT INTO userData (userID, email, fname, bday, groupID, groupCode, profilePicture) VALUES (?,?,?,?,?,?,?)`;
+    const uDataValues = [userID, user.email, user.fname, user.bday, userID, groupCode, '/profile/blank.png'];
     await pool.query(uDataQuery, uDataValues);
 
     return { 

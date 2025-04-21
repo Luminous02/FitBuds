@@ -17,6 +17,7 @@ const Settings = () => {
     groupCode: "", //user's own groupCode (read only)
     joinGroupCode: "", //input for joining another group
     groupLeaderName: "", //Name of group leader
+    profilePicture: "/profile/blank.png", // New field for profile picture
   });
 
   const [error, setError] = useState("");
@@ -27,11 +28,23 @@ const Settings = () => {
   const navigate = useNavigate();
   console.log("userID from localStorage:", userID);
 
+  // Available profile pictures
+  const profilePictures = [
+    { value: "/profile/blank.png", label: "Blank" },
+    { value: "/profile/boy1.png", label: "Boy 1" },
+    { value: "/profile/boy2.png", label: "Boy 2" },
+    { value: "/profile/boy3.png", label: "Boy 3" },
+    { value: "/profile/boy4.png", label: "Boy 4" },
+    { value: "/profile/girl1.png", label: "Girl 1" },
+    { value: "/profile/girl2.png", label: "Girl 2" },
+    { value: "/profile/girl3.png", label: "Girl 3" },
+  ];
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/auth/user/${userID}`);
-        const { name, email, unitTime, unitWeight, difficulty, notifications, privateProfile, groupCode, groupID, groupLeaderName } = response.data.user;
+        const { name, email, unitTime, unitWeight, difficulty, notifications, privateProfile, groupCode, groupID, groupLeaderName, profilePicture } = response.data.user;
 
         // Check if user is group leader (groupID === userID)
         const isLeader = groupID === parseInt(userID);
@@ -48,6 +61,7 @@ const Settings = () => {
           groupCode: groupCode || "",
           joinGroupCode: "",
           groupLeaderName: groupLeaderName || "",
+          profilePicture: profilePicture || "/profile/blank.png",
         }));
         setIsGroupLeader(isLeader);
       } catch (error) {
@@ -80,6 +94,7 @@ const Settings = () => {
         difficulty: settings.difficulty,
         notifications: settings.notifications,
         privateProfile: settings.privateProfile,
+        profilePicture: settings.profilePicture, 
       };
 
       if(settings.password) {
@@ -191,6 +206,28 @@ const Settings = () => {
               onChange={handleChange} 
             />
           </label>
+        </section>
+
+    {/*Profile picture*/}
+        <section className="settings-section">
+          <h2>Profile Picture</h2>
+          <label>
+            Select Profile Picture:
+            <select
+              name="profilePicture"
+              value={settings.profilePicture}
+              onChange={handleChange}
+            >
+              {profilePictures.map((pic) => (
+                <option key={pic.value} value={pic.value}>
+                  {pic.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <div className="profile-picture-preview">
+            <img src={settings.profilePicture} alt="Profile Preview" style={{ width: "50px", height: "50px" }} />
+          </div>
         </section>
 
     {/*join family*/}

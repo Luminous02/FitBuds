@@ -116,11 +116,11 @@ export const getGroupPointsFromDB = async (groupID, period) => {
     }
 
     const query = `
-      SELECT u.userID, u.fname AS name, COALESCE(SUM(w.points), 0) AS totalPoints
+      SELECT u.userID, u.fname AS name, COALESCE(SUM(w.points), 0) AS totalPoints, u.profilePicture
       FROM userData u
       LEFT JOIN workouts w ON u.userID = w.userID ${dateCondition}
       WHERE u.groupID = ?
-      GROUP BY u.userID, u.fname
+      GROUP BY u.userID, u.fname, u.profilePicture
       ORDER BY totalPoints DESC
     `;
 
@@ -135,7 +135,7 @@ export const getGroupPointsFromDB = async (groupID, period) => {
 export const getRecentGroupWorkoutsFromDB = async (groupID, limit = 5) => {
   try {
     const query = `
-      SELECT w.workoutID, w.userID, w.type, w.time, w.points, u.fname AS name, a.username
+      SELECT w.workoutID, w.userID, w.type, w.time, w.points, u.fname AS name, a.username, u.profilePicture
       FROM workouts w
       JOIN userData u ON w.userID = u.userID
       JOIN accounts a ON u.userID = a.userID
