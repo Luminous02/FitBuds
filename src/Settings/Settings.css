@@ -57,3 +57,43 @@
   .user-info p {
     margin: 10px 0;
   }
+
+  .error-message {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .delete-account-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .delete-account-btn:hover {
+    opacity: 0.8;
+  }
+
+  .group-code-display {
+    margin-bottom: 15px;
+  }
+  
+  .group-code-display p {
+    margin: 5px 0;
+  }
+  
+  .group-code-display strong {
+    color: #333;
+  }
+  .group-leader-display {
+    margin-bottom: 15px;
+  }
+  
+  .group-leader-display p {
+    margin: 5px 0;
+  }
+  
+  .group-leader-display strong {
+    color: #333;
+  }
