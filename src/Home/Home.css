@@ -24,6 +24,7 @@ body.darkmode .feedScroll {
   grid-column: 2;
   grid-row: 3;
   overflow-y: auto;
+  scrollbar-width: none;
   margin: 0 20px 0 20px;
   scrollbar-width: none;
   color: #3d3d3d;
@@ -57,6 +58,7 @@ body.darkmode .feedScroll {
   height: 100vh;
   background-color: #8fab71;
   overflow: auto;
+  scrollbar-width: none;
 }
 
 body.darkmode .leaderScroll .leaderboardGrid {
