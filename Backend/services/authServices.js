@@ -1,7 +1,7 @@
 import { pool } from "../config/db.js";
 
-export const registerUser = async (user) => {
-  console.log(user);
+export const registerUser = async (user, groupCode) => {
+  console.log(user, {groupCode});
 
   try {
     const acctQuery = "INSERT INTO accounts (username, password) VALUES (?,?)";
@@ -9,11 +9,15 @@ export const registerUser = async (user) => {
     const [acctResult] = await pool.query(acctQuery, acctValues);
     const userID = acctResult.insertId; // Get the auto-incremented userID
 
-    const uDataQuery = "INSERT INTO userData (userID, email, fname, bday) VALUES (?,?,?,?)";
-    const uDataValues = [userID, user.email, user.fname, user.bday];
+    const uDataQuery = `INSERT INTO userData (userID, email, fname, bday, groupID, groupCode) VALUES (?,?,?,?,?,?)`;
+    const uDataValues = [userID, user.email, user.fname, user.bday, userID, groupCode];
     await pool.query(uDataQuery, uDataValues);
 
-    return { success: true, message: "User registered successfully" };
+    return { 
+      success: true, 
+      message: "User registered successfully",
+      user: { id: userID, username: user.username },
+     };
   } catch (error) {
     console.error("Registration error:", error);
     return {
