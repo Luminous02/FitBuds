@@ -2,13 +2,14 @@ import {
   addWorkoutToDB,
   getWorkoutsFromDB,
   getWorkoutsByDateFromDB,
-  getGroupPointsFromDB
+  getGroupPointsFromDB,
+  getRecentGroupWorkoutsFromDB,
 } from "../services/workoutService.js";
 
 export const addWorkout = async (req, res) => {
   const { userID, type, distance, time, pace, reps, date } = req.body;
 
-  if (!userID || !type) {
+  if (!type) {
     return res.status(400).json({
       success: false,
       message: "User ID and workout type are required",
@@ -118,15 +119,45 @@ export const getCalWorkouts = async (req, res) => {
   }
 };
 
+export const getMonthWorkouts = async (req, res) => {
+  try {
+    const { userID, year, month } = req.query;
+
+    if (!userID || !year || !month) {
+      return res.status(400).json({
+        success: false,
+        message: "User ID, year and month are required",
+      });
+    }
+
+    const workouts = await getWorkoutsByMonthFromDB(userID, year, month);
+    return res.status(200).json({
+      success: true,
+      workouts,
+    });
+  } catch (error) {
+    console.error("Error fetching monthly workouts:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch monthly workouts",
+      error: process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
+  }
+};
+
 export const getGroupPoints = async (req, res) => {
-  const { groupID } = req.query;
+  const { groupID, period } = req.query;
 
   if (!groupID) {
     return res.status(400).json({ success: false, message: "Group ID is required" });
   }
 
+  if (!["today", "week", "month"].includes(period)) {
+    return res.status(400).json({ success: false, message: "Invalid period. Use 'today', 'week', or 'month'" });
+  }
+
   try {
-    const groupPoints = await getGroupPointsFromDB(groupID);
+    const groupPoints = await getGroupPointsFromDB(groupID, period);
     return res.status(200).json({
       success: true,
       groupPoints,
@@ -139,3 +170,26 @@ export const getGroupPoints = async (req, res) => {
     });
   }
 };
+
+export const getRecentGroupWorkouts = async (req, res) => {
+  const { groupID, limit } = req.query;
+
+  if (!groupID) {
+    return res.status(400).json({ success: false, message: "Group ID is required" });
+  }
+
+  try {
+    const workouts = await getRecentGroupWorkoutsFromDB(groupID, parseInt(limit) || 5);
+    return res.status(200).json({
+      success: true,
+      workouts,
+    });
+  } catch (error) {
+    console.error("Error fetching recent group workouts:", error.message, error.stack);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch recent group workouts: " + (error.message || "Unknown error"),
+    });
+  }
+};
+

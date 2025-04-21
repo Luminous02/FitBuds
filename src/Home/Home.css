@@ -55,6 +55,7 @@ body.darkmode .feedScroll {
   list-style-type: none;
   width: 100%;
   height: 100vh;
+  grid-template-columns: 1fr;
   background-color: #8fab71;
   overflow: auto;
 }
@@ -145,7 +146,7 @@ h1 {
   font-size: 1em;
 }
 
-.no-points {
+.no-points, .no-workouts {
   text-align: center;
   color: #777;
   font-size: 1em;

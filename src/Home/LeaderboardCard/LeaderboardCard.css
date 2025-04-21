@@ -173,3 +173,10 @@ body.darkmode .lboard_wrap .lboard_item .bar_wrap {
 body.darkmode .lboard_wrap .lboard_item .bar_wrap .inner_wrap {
   background: #d0ff9d;
 }
+
+.no-data {
+  text-align: center;
+  color: #777;
+  font-size: 1em;
+  padding: 10px;
+}
