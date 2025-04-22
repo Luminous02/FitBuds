@@ -2,6 +2,7 @@ import {
   addWorkoutToDB,
   getWorkoutsFromDB,
   getWorkoutsByDateFromDB,
+  getWorkoutsByMonthFromDB,
   getGroupPointsFromDB,
   getRecentGroupWorkoutsFromDB,
 } from "../services/workoutService.js";
@@ -155,12 +156,10 @@ export const getGroupPoints = async (req, res) => {
   }
 
   if (!["today", "week", "month"].includes(period)) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        message: "Invalid period. Use 'today', 'week', or 'month'",
-      });
+    return res.status(400).json({
+      success: false,
+      message: "Invalid period. Use 'today', 'week', or 'month'",
+    });
   }
 
   try {
