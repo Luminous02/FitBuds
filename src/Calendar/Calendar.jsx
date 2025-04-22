@@ -9,6 +9,8 @@ const Calendar = () => {
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [goToMonthInput, setGoToMonthInput] = useState("");
+  const [goToYearInput, setGoToYearInput] = useState("");
   const [workouts, setWorkouts] = useState([]);
   const [monthWorkouts, setMonthWorkouts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -180,6 +182,23 @@ const Calendar = () => {
     setSelectedDate(newSelectedDate);
   };
 
+  const handleGoToDate = () => {
+    const parts = `${goToMonthInput}/${goToYearInput}`.split("/");
+    if (parts.length === 2) {
+      const inputMonth = parseInt(parts[0]) - 1; // Month is 0-indexed
+      const inputYear = parseInt(parts[1]);
+
+      if (!isNaN(inputMonth) && !isNaN(inputYear) && inputMonth >= 0 && inputMonth <= 11) {
+        setMonth(inputMonth);
+        setYear(inputYear);
+      } else {
+        alert("Invalid month/year format. Please use MM/YYYY.");
+      }
+    } else {
+      alert("Invalid date format. Please use MM/YYYY.");
+    }
+  };
+
   return (
     <div className="container">
       <div className="left">
@@ -203,8 +222,22 @@ const Calendar = () => {
           <div className="days"></div>
           <div className="goto-today">
             <div className="goto">
-              <input type="text" placeholder="mm/yyyy" className="date-input" />
-              <button className="goto-btn">Go</button>
+            <input
+                type="text"
+                placeholder="MM"
+                className="date-input"
+                value={goToMonthInput}
+                onChange={(e) => setGoToMonthInput(e.target.value)}
+              />
+              <span>/</span>
+              <input
+                type="text"
+                placeholder="YYYY"
+                className="date-input"
+                value={goToYearInput}
+                onChange={(e) => setGoToYearInput(e.target.value)}
+              />
+              <button className="goto-btn" onClick={handleGoToDate}>Go</button>
             </div>
             <button
               className="today-btn"
